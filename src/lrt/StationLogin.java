@@ -167,4 +167,9 @@ public class StationLogin {
 		ImageIcon image2 = new ImageIcon(newImg2);
 		Bg.setIcon(image2);
 	}
+
+	/*public void setVisible(boolean b) {
+		// TODO Auto-generated method stub
+		
+	}*/
 }

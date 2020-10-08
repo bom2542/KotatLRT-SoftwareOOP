@@ -73,7 +73,7 @@ public class EmployeeLogin {
 		
 		TxtPassword = new JPasswordField();
 		TxtPassword.setFont(new Font("SUT", Font.BOLD, 30));
-		TxtPassword.setBounds(236, 260, 200, 40);
+		TxtPassword.setBounds(240, 242, 200, 40);
 		frmStationloginLrtkorat.getContentPane().add(TxtPassword);
 		
 		JButton btnClear = new JButton("Clear");
@@ -84,7 +84,7 @@ public class EmployeeLogin {
 			}
 		});
 		btnClear.setFont(new Font("SUT", Font.BOLD, 30));
-		btnClear.setBounds(211, 363, 132, 40);
+		btnClear.setBounds(211, 354, 132, 40);
 		frmStationloginLrtkorat.getContentPane().add(btnClear);
 		
 		JButton btnExit = new JButton("Exit");
@@ -94,32 +94,32 @@ public class EmployeeLogin {
 			}
 		});
 		btnExit.setFont(new Font("SUT", Font.BOLD, 30));
-		btnExit.setBounds(388, 363, 132, 40);
+		btnExit.setBounds(388, 354, 132, 40);
 		frmStationloginLrtkorat.getContentPane().add(btnExit);
 		
 		JLabel lblUsername = new JLabel("Username : ");
 		lblUsername.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblUsername.setForeground(Color.WHITE);
 		lblUsername.setFont(new Font("SUT", Font.BOLD, 32));
-		lblUsername.setBounds(41, 190, 182, 56);
+		lblUsername.setBounds(45, 172, 182, 56);
 		frmStationloginLrtkorat.getContentPane().add(lblUsername);
 		
 		JButton BtnLogin = new JButton("Login");
 		BtnLogin.setFont(new Font("SUT", Font.BOLD, 30));
-		BtnLogin.setBounds(24, 363, 132, 40);
+		BtnLogin.setBounds(24, 354, 132, 40);
 		frmStationloginLrtkorat.getContentPane().add(BtnLogin);
 		
 		JLabel lblPassword = new JLabel("Password : ");
 		lblPassword.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblPassword.setForeground(Color.WHITE);
 		lblPassword.setFont(new Font("SUT", Font.BOLD, 32));
-		lblPassword.setBounds(41, 250, 182, 56);
+		lblPassword.setBounds(45, 232, 182, 56);
 		frmStationloginLrtkorat.getContentPane().add(lblPassword);
 		
 		TxtUsername = new JTextField();
 		TxtUsername.setFont(new Font("SUT", Font.PLAIN, 24));
 		TxtUsername.setColumns(10);
-		TxtUsername.setBounds(236, 200, 200, 40);
+		TxtUsername.setBounds(240, 182, 200, 40);
 		frmStationloginLrtkorat.getContentPane().add(TxtUsername);
 		
 		JLabel Bg = new JLabel();
@@ -130,7 +130,7 @@ public class EmployeeLogin {
 		lblNewLabel.setIcon(new ImageIcon("C:\\Java\\ProjectAdvOOAGroup1\\images\\Today-at-Apple-at-Home-wallpapers-Matt-Birchler-idownloadblog-5-desktop.jpeg"));
 		lblNewLabel.setBackground(SystemColor.windowText);
 		lblNewLabel.setForeground(SystemColor.textHighlight);
-		lblNewLabel.setBounds(-129, 165, 731, 167);
+		lblNewLabel.setBounds(-125, 147, 731, 167);
 		frmStationloginLrtkorat.getContentPane().add(lblNewLabel);
 		frmStationloginLrtkorat.getContentPane().add(Bg);
 		ImageIcon MyImage2 = new ImageIcon(path);
