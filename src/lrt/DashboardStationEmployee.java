@@ -174,7 +174,7 @@ public class DashboardStationEmployee extends EmployeeLogin {
 		JButton btnEmployee = new JButton(" Employee");
 		btnEmployee.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				EmployeeLogin el = new EmployeeLogin();
+				//EmployeeLogin el = new EmployeeLogin();
 				//el.setTitle("Wow");
 				//el.setVisible(true);
 			}
