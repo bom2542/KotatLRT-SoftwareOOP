@@ -12,9 +12,16 @@ import javax.swing.JLabel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+
+import com.mysql.jdbc.Connection;
+import com.mysql.jdbc.Statement;
+
 import javax.swing.ImageIcon;
 import java.awt.Toolkit;
 import java.awt.event.ActionListener;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.awt.event.ActionEvent;
 
 public class StationLogin {
@@ -24,6 +31,11 @@ public class StationLogin {
 	public static String path;
 	private JTextField TxtUsername;
 	private JPasswordField TxtPassword;
+	Statement st;
+	Connection con = null;
+	ResultSet rsRead;
+	public String kuy;
+	public String kuy2 = "bom";
 
 
 	/**
@@ -62,6 +74,20 @@ public class StationLogin {
 		frmStationloginLrtkorat.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmStationloginLrtkorat.getContentPane().setLayout(null);
 		
+		//connect db
+		try{
+			 Class.forName("com.mysql.jdbc.Driver");
+			 con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/lrtkorat", "pharadornl_lrtkorat", "HSt1N9rb4Vpyl");
+			 st = (Statement) con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_UPDATABLE);
+			 rsRead = st.executeQuery("select * from Station");
+			 rsRead.last();
+		}
+			catch(SQLException e){
+			 System.out.println(e);
+		}
+			catch(Exception ex) {
+			 System.out.println(ex);
+		}
 
 		JLabel Logo = new JLabel();
 		Logo.setBounds(239, 5, 93, 117);
@@ -79,6 +105,7 @@ public class StationLogin {
 		TxtPassword.setBounds(238, 275, 200, 40);
 		frmStationloginLrtkorat.getContentPane().add(TxtPassword);
 		
+		//clear btn
 		JButton btnClear = new JButton("Clear");
 		btnClear.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -91,6 +118,7 @@ public class StationLogin {
 		btnClear.setBounds(211, 363, 132, 40);
 		frmStationloginLrtkorat.getContentPane().add(btnClear);
 		
+		//exit btn
 		JButton btnExit = new JButton("Exit");
 		btnExit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -114,10 +142,21 @@ public class StationLogin {
 		frmStationloginLrtkorat.getContentPane().add(TxtStation);
 		TxtStation.setColumns(10);
 		
+		//login btn
 		JButton BtnLogin = new JButton("Login");
 		BtnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
+				LrtSession ls = new LrtSession();
+				ls.setStationID(kuy2);
+				kuy = ls.getStationID();
+				System.out.println(kuy);
+				
+				/*try {
+					TxtStation.setText(rsRead.getString("Station_ID"));
+				}catch (SQLException e1) {
+					e1.printStackTrace();
+				}*/
 			}
 		});
 		BtnLogin.setFont(new Font("SUT", Font.BOLD, 30));
