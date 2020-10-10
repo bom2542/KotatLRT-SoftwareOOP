@@ -162,7 +162,7 @@ public class DashboardStationEmployee extends EmployeeLogin {
 		frmDashboardstationemployees.getContentPane().add(title);*/
 		
 		JLabel Title2 = new JLabel();
-		Title2.setBounds(124, 0, 1021, 226);
+		Title2.setBounds(0, 0, 1264, 226);
 		path = "C:\\\\Java\\\\ProjectAdvOOAGroup1\\\\images\\\\3143170.jpg";
 		frmDashboardstationemployees.getContentPane().add(Title2);
 		MyImage = new ImageIcon(path);

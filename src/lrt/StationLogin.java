@@ -34,8 +34,6 @@ public class StationLogin {
 	Statement st;
 	Connection con = null;
 	ResultSet rsRead;
-	public String kuy;
-	public String kuy2 = "bom";
 
 
 	/**
@@ -147,10 +145,8 @@ public class StationLogin {
 		BtnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				LrtSession ls = new LrtSession();
-				ls.setStationID(kuy2);
-				kuy = ls.getStationID();
-				System.out.println(kuy);
+				//LrtSession ls = new LrtSession();
+				//ls.setStationID(a);
 				
 				/*try {
 					TxtStation.setText(rsRead.getString("Station_ID"));
