@@ -15,7 +15,7 @@ import java.awt.Toolkit;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class DashboardStationEmployee extends EmployeeLogin {
+public class DashboardStationEmployee extends CheckLogin{
 
 	private JFrame frmDashboardstationemployees;
 	public String path;
@@ -23,6 +23,7 @@ public class DashboardStationEmployee extends EmployeeLogin {
 	public Image img;
 	public Image newImg;
 	public ImageIcon image;
+	public String stdid, stdname, stdzone;
 
 	/**
 	 * Launch the application.
@@ -58,18 +59,6 @@ public class DashboardStationEmployee extends EmployeeLogin {
 		frmDashboardstationemployees.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmDashboardstationemployees.getContentPane().setLayout(null);
 		
-		/*JLabel lblNewLabel2 = new JLabel("");
-		lblNewLabel2.setIcon(new ImageIcon("C:\\Java\\ProjectAdvOOAGroup1\\images\\3143170.jpg"));
-		lblNewLabel2.setBackground(SystemColor.windowText);
-		lblNewLabel2.setForeground(SystemColor.textHighlight);
-		lblNewLabel2.setBounds(-130, 128, 731, 211);
-		frmDashboardstationemployees.getContentPane().add(lblNewLabel2);
-		ImageIcon MyImage2 = new ImageIcon(path);
-		Image img2 = MyImage2.getImage();
-		Image newImg2 = img2.getScaledInstance(lblNewLabel2.getWidth(), lblNewLabel2.getHeight(), Image.SCALE_SMOOTH);
-		ImageIcon image2 = new ImageIcon(newImg2);
-		lblNewLabel2.setIcon(image2);*/
-		
 		JLabel Logo = new JLabel();
 		Logo.setBounds(158, 11, 159, 201);
 		path = "C:\\\\Java\\\\ProjectAdvOOAGroup1\\\\images\\\\LRTLOGO1.png";
@@ -87,14 +76,17 @@ public class DashboardStationEmployee extends EmployeeLogin {
 		lblNewLabel.setBounds(341, 36, 785, 80);
 		frmDashboardstationemployees.getContentPane().add(lblNewLabel);
 		
-		JLabel lblNewLabel_1 = new JLabel("Status :");
+		JLabel lblNewLabel_1 = new JLabel("Station ID :");
 		lblNewLabel_1.setFont(new Font("SUT", Font.BOLD, 40));
 		lblNewLabel_1.setBounds(44, 261, 219, 44);
 		frmDashboardstationemployees.getContentPane().add(lblNewLabel_1);
 		
-		JLabel lbStationID = new JLabel("??");
+		CheckLogin cl = new CheckLogin();
+		JLabel lbStationID = new JLabel();
+		stdid = cl.getSearch();
+		lbStationID.setText(stdid);
 		lbStationID.setFont(new Font("SUT", Font.PLAIN, 40));
-		lbStationID.setBounds(176, 261, 191, 44);
+		lbStationID.setBounds(214, 261, 153, 44);
 		frmDashboardstationemployees.getContentPane().add(lbStationID);
 		
 		JLabel lblOriginstation = new JLabel("Station Name : ");
@@ -102,7 +94,9 @@ public class DashboardStationEmployee extends EmployeeLogin {
 		lblOriginstation.setBounds(377, 261, 228, 44);
 		frmDashboardstationemployees.getContentPane().add(lblOriginstation);
 		
-		JLabel lbOriginStation = new JLabel("??");
+		JLabel lbOriginStation = new JLabel();
+		//stdname = cl.getStationName();
+		lbOriginStation.setText(stdname);
 		lbOriginStation.setFont(new Font("SUT", Font.PLAIN, 40));
 		lbOriginStation.setBounds(593, 261, 326, 44);
 		frmDashboardstationemployees.getContentPane().add(lbOriginStation);
@@ -156,10 +150,6 @@ public class DashboardStationEmployee extends EmployeeLogin {
 		lblNewLabel_2.setBounds(314, 102, 306, 65);
 		frmDashboardstationemployees.getContentPane().add(lblNewLabel_2);
 		
-		/*JLabel title = new JLabel("New label");
-		title.setForeground(Color.ORANGE);
-		title.setBounds(34, 80, 46, 14);
-		frmDashboardstationemployees.getContentPane().add(title);*/
 		
 		JLabel Title2 = new JLabel();
 		Title2.setBounds(0, 0, 1264, 226);
@@ -185,7 +175,6 @@ public class DashboardStationEmployee extends EmployeeLogin {
 		btnEmployee.setBackground(SystemColor.activeCaption);
 		btnEmployee.setBounds(10, 680, 225, 55);
 		frmDashboardstationemployees.getContentPane().add(btnEmployee);
-		
 		
 	}
 }

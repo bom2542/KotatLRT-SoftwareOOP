@@ -65,7 +65,7 @@ public class StationMemberRegister {
 		frmMemberregisterLrtkorat.getContentPane().setLayout(null);
 		
 		JLabel Logo = new JLabel();
-		Logo.setBounds(158, 11, 159, 201);
+		Logo.setBounds(156, 0, 159, 201);
 		path = "C:\\\\Java\\\\ProjectAdvOOAGroup1\\\\images\\\\LRTLOGO1.png";
 		
 		JLabel lblNewLabel_2 = new JLabel("\u0E23\u0E16\u0E44\u0E1F\u0E1F\u0E49\u0E32\u0E23\u0E32\u0E07\u0E40\u0E1A\u0E32\u0E42\u0E04\u0E23\u0E32\u0E0A");
@@ -89,7 +89,7 @@ public class StationMemberRegister {
 		Logo.setIcon(image);
 		
 		JLabel Title2 = new JLabel();
-		Title2.setBounds(124, 0, 1021, 217);
+		Title2.setBounds(0, 0, 1264, 212);
 		path = "C:\\\\Java\\\\ProjectAdvOOAGroup1\\\\images\\\\3143170.jpg";
 		frmMemberregisterLrtkorat.getContentPane().add(Title2);
 		MyImage = new ImageIcon(path);
@@ -99,8 +99,8 @@ public class StationMemberRegister {
 		Title2.setIcon(image);
 		
 		JLabel lblName = new JLabel("NAME:");
-		lblName.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		lblName.setBounds(323, 341, 108, 44);
+		lblName.setFont(new Font("SUT", Font.BOLD, 30));
+		lblName.setBounds(32, 320, 108, 44);
 		frmMemberregisterLrtkorat.getContentPane().add(lblName);
 		
 		JLabel lblSex = new JLabel("SEX:");
@@ -135,7 +135,7 @@ public class StationMemberRegister {
 		
 		txtName = new JTextField();
 		txtName.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		txtName.setBounds(455, 341, 335, 40);
+		txtName.setBounds(126, 324, 335, 40);
 		frmMemberregisterLrtkorat.getContentPane().add(txtName);
 		txtName.setColumns(10);
 		
@@ -175,7 +175,7 @@ public class StationMemberRegister {
 		lblNewLabel_2_1.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_2_1.setForeground(Color.black);
 		lblNewLabel_2_1.setFont(new Font("SUT", Font.BOLD, 50));
-		lblNewLabel_2_1.setBounds(373, 228, 554, 65);
+		lblNewLabel_2_1.setBounds(396, 228, 554, 65);
 		frmMemberregisterLrtkorat.getContentPane().add(lblNewLabel_2_1);
 		
 		

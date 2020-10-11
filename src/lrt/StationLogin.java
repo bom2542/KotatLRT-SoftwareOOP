@@ -9,6 +9,7 @@ import java.awt.SystemColor;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
@@ -19,21 +20,19 @@ import com.mysql.jdbc.Statement;
 import javax.swing.ImageIcon;
 import java.awt.Toolkit;
 import java.awt.event.ActionListener;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.awt.event.ActionEvent;
 
 public class StationLogin {
 
 	private JFrame frmStationloginLrtkorat;
 	private JTextField TxtStation;
-	public static String path;
-	private JTextField TxtUsername;
 	private JPasswordField TxtPassword;
 	Statement st;
 	Connection con = null;
 	ResultSet rsRead;
+	private String std, pass, path;
+	int check;
 
 
 	/**
@@ -71,24 +70,9 @@ public class StationLogin {
 		frmStationloginLrtkorat.setBounds(100, 100, 566, 466);
 		frmStationloginLrtkorat.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmStationloginLrtkorat.getContentPane().setLayout(null);
-		
-		//connect db
-		try{
-			 Class.forName("com.mysql.jdbc.Driver");
-			 con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/lrtkorat", "pharadornl_lrtkorat", "HSt1N9rb4Vpyl");
-			 st = (Statement) con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_UPDATABLE);
-			 rsRead = st.executeQuery("select * from Station");
-			 rsRead.last();
-		}
-			catch(SQLException e){
-			 System.out.println(e);
-		}
-			catch(Exception ex) {
-			 System.out.println(ex);
-		}
 
 		JLabel Logo = new JLabel();
-		Logo.setBounds(239, 5, 93, 117);
+		Logo.setBounds(238, 13, 93, 117);
 		path = "C:\\\\Java\\\\ProjectAdvOOAGroup1\\\\images\\\\LRTLOGO1.png";
 		frmStationloginLrtkorat.getContentPane().add(Logo);
 		ImageIcon MyImage = new ImageIcon(path);
@@ -99,8 +83,8 @@ public class StationLogin {
 		
 		
 		TxtPassword = new JPasswordField();
-		TxtPassword.setFont(new Font("SUT", Font.BOLD, 30));
-		TxtPassword.setBounds(238, 275, 200, 40);
+		TxtPassword.setFont(new Font("SUT", Font.PLAIN, 30));
+		TxtPassword.setBounds(231, 239, 200, 40);
 		frmStationloginLrtkorat.getContentPane().add(TxtPassword);
 		
 		//clear btn
@@ -108,12 +92,11 @@ public class StationLogin {
 		btnClear.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				TxtStation.setText("");
-				TxtUsername.setText("");
 				TxtPassword.setText("");
 			}
 		});
 		btnClear.setFont(new Font("SUT", Font.BOLD, 30));
-		btnClear.setBounds(211, 363, 132, 40);
+		btnClear.setBounds(210, 352, 132, 40);
 		frmStationloginLrtkorat.getContentPane().add(btnClear);
 		
 		//exit btn
@@ -124,66 +107,57 @@ public class StationLogin {
 			}
 		});
 		btnExit.setFont(new Font("SUT", Font.BOLD, 30));
-		btnExit.setBounds(388, 363, 132, 40);
+		btnExit.setBounds(387, 352, 132, 40);
 		frmStationloginLrtkorat.getContentPane().add(btnExit);
 		
-		JLabel lblUsername = new JLabel("Username : ");
-		lblUsername.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblUsername.setForeground(Color.WHITE);
-		lblUsername.setFont(new Font("SUT", Font.BOLD, 32));
-		lblUsername.setBounds(43, 205, 182, 56);
-		frmStationloginLrtkorat.getContentPane().add(lblUsername);
-		
 		TxtStation = new JTextField();
-		TxtStation.setFont(new Font("SUT", Font.PLAIN, 24));
-		TxtStation.setBounds(238, 155, 110, 40);
+		TxtStation.setFont(new Font("SUT", Font.PLAIN, 30));
+		TxtStation.setBounds(232, 178, 110, 40);
 		frmStationloginLrtkorat.getContentPane().add(TxtStation);
 		TxtStation.setColumns(10);
 		
 		//login btn
 		JButton BtnLogin = new JButton("Login");
 		BtnLogin.addActionListener(new ActionListener() {
+			@SuppressWarnings("deprecation")
 			public void actionPerformed(ActionEvent e) {
 				
-				//LrtSession ls = new LrtSession();
-				//ls.setStationID(a);
+				CheckLogin cl = new CheckLogin();
+				std = TxtStation.getText();
+				pass = TxtPassword.getText();
+				cl.setStationLogin(std, pass);
+				check = cl.getCheckLogin();
 				
-				/*try {
-					TxtStation.setText(rsRead.getString("Station_ID"));
-				}catch (SQLException e1) {
-					e1.printStackTrace();
-				}*/
+				if(check == 1) {
+					@SuppressWarnings("unused")
+					DashboardStationEmployee dse = new DashboardStationEmployee();
+					DashboardStationEmployee.main(null);
+					frmStationloginLrtkorat.dispose();
+					
+				}else {
+					JFrame f = new JFrame();  
+				    JOptionPane.showMessageDialog(f,"Login Failed !!!","StationLogin - LRTKORAT",JOptionPane.ERROR_MESSAGE);     
+				}
 			}
 		});
 		BtnLogin.setFont(new Font("SUT", Font.BOLD, 30));
-		BtnLogin.setBounds(24, 363, 132, 40);
+		BtnLogin.setBounds(23, 352, 132, 40);
 		frmStationloginLrtkorat.getContentPane().add(BtnLogin);
 		
-		JLabel lblPassword = new JLabel("Password : ");
+		JLabel lblPassword = new JLabel("PIN : ");
 		lblPassword.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblPassword.setForeground(Color.WHITE);
-		lblPassword.setFont(new Font("SUT", Font.BOLD, 32));
-		lblPassword.setBounds(43, 265, 182, 56);
+		lblPassword.setFont(new Font("SUT", Font.BOLD, 30));
+		lblPassword.setBounds(36, 229, 182, 56);
 		frmStationloginLrtkorat.getContentPane().add(lblPassword);
 		
 		JLabel lblStation = new JLabel("Station ID : ");
 		lblStation.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblStation.setForeground(Color.WHITE);
-		lblStation.setFont(new Font("SUT", Font.BOLD, 32));
-		lblStation.setBounds(43, 145, 182, 56);
+		lblStation.setFont(new Font("SUT", Font.BOLD, 30));
+		lblStation.setBounds(37, 168, 182, 56);
 		frmStationloginLrtkorat.getContentPane().add(lblStation);
 		
-		TxtUsername = new JTextField();
-		TxtUsername.setFont(new Font("SUT", Font.PLAIN, 24));
-		TxtUsername.setColumns(10);
-		TxtUsername.setBounds(238, 215, 200, 40);
-		frmStationloginLrtkorat.getContentPane().add(TxtUsername);
-		
-		/*JLabel Bg = new JLabel("New label");
-		Bg.setIcon(new ImageIcon("C:\\Java\\ProjectAdvOOAGroup1\\images\\1299.jpg"));
-		Bg.setBounds(35, 27, 443, 315);
-		frmStationloginLrtkorat.getContentPane().add(Bg);
-		Image newImg = img.getScaledInstance(Bg.getWidth(), Bg.getHeight(), Image.SCALE_SMOOTH);*/
 		
 		JLabel Bg = new JLabel();
 		Bg.setBounds(0, 0, 550, 427);
@@ -193,7 +167,7 @@ public class StationLogin {
 		lblNewLabel.setIcon(new ImageIcon("C:\\Java\\ProjectAdvOOAGroup1\\images\\3143170.jpg"));
 		lblNewLabel.setBackground(SystemColor.windowText);
 		lblNewLabel.setForeground(SystemColor.textHighlight);
-		lblNewLabel.setBounds(-130, 128, 731, 211);
+		lblNewLabel.setBounds(-130, 141, 731, 180);
 		frmStationloginLrtkorat.getContentPane().add(lblNewLabel);
 		frmStationloginLrtkorat.getContentPane().add(Bg);
 		ImageIcon MyImage2 = new ImageIcon(path);
@@ -203,8 +177,4 @@ public class StationLogin {
 		Bg.setIcon(image2);
 	}
 
-	/*public void setVisible(boolean b) {
-		// TODO Auto-generated method stub
-		
-	}*/
 }
