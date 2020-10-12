@@ -22,18 +22,21 @@ import javax.swing.SpinnerNumberModel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Toolkit;
+import javax.swing.event.ChangeListener;
+import javax.swing.event.ChangeEvent;
 
-public class DashboardMachine {
+public class DashboardMachine extends DashboardStationEmployee {
 
-	private JFrame frame;
+	private JFrame frmDashboardmachineLrtkorat;
 	private String path;
 	private ImageIcon MyImage;
 	private Image img;
 	private Image newImg;
 	private ImageIcon image;
 	private JLabel lbClock;
+	private String destination="", status="";
 	
-	
+	TicketPrice c = new TicketPrice();
 	ButtonGroup groupstation = new ButtonGroup();
 
 	/**
@@ -44,7 +47,7 @@ public class DashboardMachine {
 			public void run() {
 				try {
 					DashboardMachine window = new DashboardMachine();
-					window.frame.setVisible(true);
+					window.frmDashboardmachineLrtkorat.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -73,7 +76,7 @@ public class DashboardMachine {
 						minute = timedate.get(Calendar.MINUTE);
 						hour = timedate.get(Calendar.HOUR);
 					
-						lbClock.setText("Date " + day + "/" + month + "/" + year + " Time " + hour + ":" + minute + ":" + second);
+						lbClock.setText(day + "/" + month + "/" + year +" " + hour + ":" + minute + ":" + second);
 						date = day + "/" + month + "/" + year;
 						time = hour + ":" + minute + ":" + second;
 						sleep(1000);
@@ -98,18 +101,57 @@ public class DashboardMachine {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame();
-		frame.setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Java\\ProjectAdvOOAGroup1\\images\\LRTLOGO2.png"));
-		frame.setTitle("Dashboard Machine");
-		frame.setBounds(100, 100, 1280, 1000);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
+		frmDashboardmachineLrtkorat = new JFrame();
+		frmDashboardmachineLrtkorat.setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Java\\ProjectAdvOOAGroup1\\images\\LRTLOGO2.png"));
+		frmDashboardmachineLrtkorat.setTitle("DashboardMachine - LRTKORAT");
+		frmDashboardmachineLrtkorat.setBounds(100, 100, 1280, 1000);
+		frmDashboardmachineLrtkorat.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmDashboardmachineLrtkorat.getContentPane().setLayout(null);
+		
+		CheckLogin cl = new CheckLogin();
 		
 		JLabel Logo = new JLabel();
-		Logo.setBounds(71, 13, 159, 201);
+		Logo.setBounds(141, 14, 112, 147);
 		path = "C:\\\\Java\\\\ProjectAdvOOAGroup1\\\\images\\\\LRTLOGO1.png";
-		frame.getContentPane().setLayout(null);
-		frame.getContentPane().add(Logo);
+		frmDashboardmachineLrtkorat.getContentPane().setLayout(null);
+		
+		JLabel lbOriginStation_1 = new JLabel();
+		
+		lbOriginStation_1.setText((String) null);
+		lbOriginStation_1.setText(stdname);
+		lbOriginStation_1.setFont(new Font("SUT", Font.PLAIN, 40));
+		lbOriginStation_1.setBounds(457, 655, 470, 44);
+		frmDashboardmachineLrtkorat.getContentPane().add(lbOriginStation_1);
+		
+		JLabel lblOriginstation_1_1 = new JLabel("Destination Station : ");
+		lblOriginstation_1_1.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblOriginstation_1_1.setFont(new Font("SUT", Font.BOLD, 40));
+		lblOriginstation_1_1.setBounds(149, 715, 302, 44);
+		frmDashboardmachineLrtkorat.getContentPane().add(lblOriginstation_1_1);
+		
+		JLabel lblOriginstation_1 = new JLabel("Origin Station : ");
+		lblOriginstation_1.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblOriginstation_1.setFont(new Font("SUT", Font.BOLD, 40));
+		lblOriginstation_1.setBounds(219, 655, 232, 44);
+		frmDashboardmachineLrtkorat.getContentPane().add(lblOriginstation_1);
+		
+		JLabel lblConclusion = new JLabel("Conclusion : ");
+		lblConclusion.setFont(new Font("SUT", Font.BOLD, 50));
+		lblConclusion.setBounds(22, 573, 247, 44);
+		frmDashboardmachineLrtkorat.getContentPane().add(lblConclusion);
+		
+		lbClock = new JLabel("");
+		lbClock.setForeground(Color.WHITE);
+		lbClock.setHorizontalAlignment(SwingConstants.RIGHT);
+		lbClock.setFont(new Font("Digital-7 Mono", Font.BOLD, 30));
+		lbClock.setBounds(731, 106, 323, 44);
+		frmDashboardmachineLrtkorat.getContentPane().add(lbClock);
+		
+		JLabel lblDesc = new JLabel("Destination Station : ");
+		lblDesc.setFont(new Font("SUT", Font.BOLD, 40));
+		lblDesc.setBounds(25, 272, 323, 44);
+		frmDashboardmachineLrtkorat.getContentPane().add(lblDesc);
+		frmDashboardmachineLrtkorat.getContentPane().add(Logo);
 		MyImage = new ImageIcon(path);
 		img = MyImage.getImage();
 		newImg = img.getScaledInstance(Logo.getWidth(), Logo.getHeight(), Image.SCALE_SMOOTH);
@@ -117,143 +159,371 @@ public class DashboardMachine {
 		Logo.setIcon(image);
 		
 		JLabel label = new JLabel("\u0E23\u0E16\u0E44\u0E1F\u0E1F\u0E49\u0E32\u0E23\u0E32\u0E07\u0E40\u0E1A\u0E32\u0E42\u0E04\u0E23\u0E32\u0E0A");
-		label.setHorizontalAlignment(SwingConstants.CENTER);
+		label.setHorizontalAlignment(SwingConstants.LEFT);
 		label.setForeground(Color.WHITE);
-		label.setFont(new Font("Dialog", Font.BOLD, 40));
-		label.setBounds(273, 112, 468, 65);
-		frame.getContentPane().add(label);
+		label.setFont(new Font("SUT", Font.BOLD, 40));
+		label.setBounds(274, 106, 315, 44);
+		frmDashboardmachineLrtkorat.getContentPane().add(label);
 		
 		JLabel label_1 = new JLabel("KORAT LIGHT-RAIL TRANSPORT (LRTKORAT)");
-		label_1.setHorizontalAlignment(SwingConstants.CENTER);
+		label_1.setHorizontalAlignment(SwingConstants.LEFT);
 		label_1.setForeground(new Color(147, 112, 219));
-		label_1.setFont(new Font("Dialog", Font.BOLD, 50));
-		label_1.setBounds(269, 41, 883, 80);
-		frame.getContentPane().add(label_1);
+		label_1.setFont(new Font("SUT", Font.BOLD, 50));
+		label_1.setBounds(274, 28, 838, 80);
+		frmDashboardmachineLrtkorat.getContentPane().add(label_1);
+		
+		JLabel lbStationID = new JLabel();
+		stdid = cl.getSearch();
+		lbStationID.setText(stdid);
+		lbStationID.setFont(new Font("SUT", Font.PLAIN, 40));
+		lbStationID.setBounds(518, 189, 153, 44);
+		frmDashboardmachineLrtkorat.getContentPane().add(lbStationID);
+		
+		JLabel lblOriginstation = new JLabel("Origin Station : ");
+		lblOriginstation.setFont(new Font("SUT", Font.BOLD, 40));
+		lblOriginstation.setBounds(297, 189, 232, 44);
+		frmDashboardmachineLrtkorat.getContentPane().add(lblOriginstation);
+		
 		
 		JLabel Title2 = new JLabel();
-		Title2.setBounds(0, 0, 1264, 226);
+		Title2.setBounds(0, 0, 1264, 168);
 		path = "C:\\\\Java\\\\ProjectAdvOOAGroup1\\\\images\\\\3143170.jpg";
-		frame.getContentPane().add(Title2);
+		frmDashboardmachineLrtkorat.getContentPane().add(Title2);
 		MyImage = new ImageIcon(path);
 		img = MyImage.getImage();
 		newImg = img.getScaledInstance(Title2.getWidth(), Title2.getHeight(), Image.SCALE_SMOOTH);
 		image = new ImageIcon(newImg);
 		Title2.setIcon(image);
 		
+		JLabel destinat = new JLabel();
+		destinat.setHorizontalAlignment(SwingConstants.LEFT);
+		destinat.setFont(new Font("SUT", Font.PLAIN, 40));
+		destinat.setBounds(457, 715, 461, 44);
+		frmDashboardmachineLrtkorat.getContentPane().add(destinat);
+		
+		JLabel opPrice = new JLabel("");
+		opPrice.setFont(new Font("SUT", Font.BOLD, 80));
+		opPrice.setBounds(457, 867, 207, 44);
+		frmDashboardmachineLrtkorat.getContentPane().add(opPrice);
+		
+		JLabel lbOriginStation = new JLabel();
+		stdname = cl.getStationName();
+		//System.out.print(stdname);
+		lbOriginStation.setText(stdname);
+		lbOriginStation.setFont(new Font("SUT", Font.PLAIN, 40));
+		lbOriginStation.setBounds(586, 189, 541, 44);
+		frmDashboardmachineLrtkorat.getContentPane().add(lbOriginStation);
+		
 		JRadioButton rbG7 = new JRadioButton("");
+		rbG7.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				destination = "G7";
+				status = cl.getStationID();
+				c.MoneyCheck(status,destination);
+				c.setStation();
+				destinat.setText(c.getStationNameEN());
+				
+				opPrice.setText(Double.toString(c.getprice()));
+			}
+		});
 		rbG7.setBackground(Color.WHITE);
-		rbG7.setBounds(71, 329, 25, 25);
-		frame.getContentPane().add(rbG7);
+		rbG7.setBounds(71, 346, 25, 25);
+		frmDashboardmachineLrtkorat.getContentPane().add(rbG7);
 		
 		JRadioButton rbG8 = new JRadioButton("");
+		rbG8.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				destination = "G8";
+				
+				status = cl.getStationID();
+				c.MoneyCheck(status,destination);
+				c.setStation();
+				destinat.setText(c.getStationNameEN());
+				
+				opPrice.setText(Double.toString(c.getprice()));
+			}
+		});
 		rbG8.setBackground(Color.WHITE);
-		rbG8.setBounds(141, 329, 25, 25);
-		frame.getContentPane().add(rbG8);
+		rbG8.setBounds(141, 346, 25, 25);
+		frmDashboardmachineLrtkorat.getContentPane().add(rbG8);
 		
 		JRadioButton rbG9 = new JRadioButton("");
+		rbG9.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				destination = "G9";
+				
+				status = cl.getStationID();
+				c.MoneyCheck(status,destination);
+				c.setStation();
+				destinat.setText(c.getStationNameEN());
+				
+				opPrice.setText(Double.toString(c.getprice()));
+			}
+		});
 		rbG9.setBackground(Color.WHITE);
-		rbG9.setBounds(205, 329, 25, 25);
-		frame.getContentPane().add(rbG9);
+		rbG9.setBounds(205, 346, 25, 25);
+		frmDashboardmachineLrtkorat.getContentPane().add(rbG9);
 		
 		JRadioButton rbG10 = new JRadioButton("");
+		rbG10.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				destination = "G10";
+				status = cl.getStationID();
+				c.MoneyCheck(status,destination);
+				c.setStation();
+				destinat.setText(c.getStationNameEN());
+				
+				opPrice.setText(Double.toString(c.getprice()));
+			}
+		});
 		rbG10.setBackground(Color.WHITE);
-		rbG10.setBounds(268, 329, 25, 25);
-		frame.getContentPane().add(rbG10);
+		rbG10.setBounds(274, 347, 25, 25);
+		frmDashboardmachineLrtkorat.getContentPane().add(rbG10);
 		
 		JRadioButton rbG11 = new JRadioButton("");
+		rbG11.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				destination = "G11";
+				status = cl.getStationID();
+				c.MoneyCheck(status,destination);
+				c.setStation();
+				destinat.setText(c.getStationNameEN());
+				
+				opPrice.setText(Double.toString(c.getprice()));
+			}
+		});
 		rbG11.setBackground(Color.WHITE);
-		rbG11.setBounds(326, 329, 25, 25);
-		frame.getContentPane().add(rbG11);
+		rbG11.setBounds(332, 347, 25, 25);
+		frmDashboardmachineLrtkorat.getContentPane().add(rbG11);
 		
 		JRadioButton rbG12 = new JRadioButton("");
+		rbG12.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				destination = "G12";
+				status = cl.getStationID();
+				c.MoneyCheck(status,destination);
+				c.setStation();
+				destinat.setText(c.getStationNameEN());
+				
+				opPrice.setText(Double.toString(c.getprice()));
+			}
+		});
 		rbG12.setBackground(Color.WHITE);
-		rbG12.setBounds(388, 329, 25, 25);
-		frame.getContentPane().add(rbG12);
+		rbG12.setBounds(394, 347, 25, 25);
+		frmDashboardmachineLrtkorat.getContentPane().add(rbG12);
 		
 		JRadioButton rbG13 = new JRadioButton("");
+		rbG13.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				destination = "G13";
+				status = cl.getStationID();
+				c.MoneyCheck(status,destination);
+				c.setStation();
+				destinat.setText(c.getStationNameEN());
+				
+				opPrice.setText(Double.toString(c.getprice()));
+			}
+		});
 		rbG13.setBackground(Color.WHITE);
-		rbG13.setBounds(455, 329, 25, 25);
-		frame.getContentPane().add(rbG13);
+		rbG13.setBounds(461, 347, 25, 25);
+		frmDashboardmachineLrtkorat.getContentPane().add(rbG13);
 		
 		JRadioButton rbG14 = new JRadioButton("");
+		rbG14.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				destination = "G14";
+				status = cl.getStationID();
+				c.MoneyCheck(status,destination);
+				c.setStation();
+				destinat.setText(c.getStationNameEN());
+				
+				opPrice.setText(Double.toString(c.getprice()));
+			}
+		});
 		rbG14.setBackground(Color.WHITE);
-		rbG14.setBounds(514, 329, 25, 25);
-		frame.getContentPane().add(rbG14);
+		rbG14.setBounds(520, 347, 25, 25);
+		frmDashboardmachineLrtkorat.getContentPane().add(rbG14);
 		
 		JRadioButton rbG15 = new JRadioButton("");
+		rbG15.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				destination = "G15";
+				status = cl.getStationID();
+				c.MoneyCheck(status,destination);
+				c.setStation();
+				destinat.setText(c.getStationNameEN());
+				
+				opPrice.setText(Double.toString(c.getprice()));
+			}
+		});
 		rbG15.setBackground(Color.WHITE);
-		rbG15.setBounds(585, 329, 25, 25);
-		frame.getContentPane().add(rbG15);
+		rbG15.setBounds(591, 347, 25, 25);
+		frmDashboardmachineLrtkorat.getContentPane().add(rbG15);
 		
 		JRadioButton rbG16 = new JRadioButton("");
+		rbG16.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				destination = "G16";
+				status = cl.getStationID();
+				c.MoneyCheck(status,destination);
+				c.setStation();
+				destinat.setText(c.getStationNameEN());
+				
+				opPrice.setText(Double.toString(c.getprice()));
+			}
+		});
 		rbG16.setBackground(Color.WHITE);
-		rbG16.setBounds(690, 370, 25, 25);
-		frame.getContentPane().add(rbG16);
+		rbG16.setBounds(696, 388, 25, 25);
+		frmDashboardmachineLrtkorat.getContentPane().add(rbG16);
 		
 		JRadioButton rbG17 = new JRadioButton("");
+		rbG17.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				destination = "G17";
+				status = cl.getStationID();
+				c.MoneyCheck(status,destination);
+				c.setStation();
+				destinat.setText(c.getStationNameEN());
+				
+				opPrice.setText(Double.toString(c.getprice()));
+			}
+		});
 		rbG17.setBackground(Color.WHITE);
-		rbG17.setBounds(722, 405, 25, 25);
-		frame.getContentPane().add(rbG17);
+		rbG17.setBounds(728, 423, 25, 25);
+		frmDashboardmachineLrtkorat.getContentPane().add(rbG17);
 		
 		JRadioButton rbG18 = new JRadioButton("");
+		rbG18.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				destination = "G18";
+				status = cl.getStationID();
+				c.MoneyCheck(status,destination);
+				c.setStation();
+				destinat.setText(c.getStationNameEN());
+				
+				opPrice.setText(Double.toString(c.getprice()));
+			}
+		});
 		rbG18.setBackground(Color.WHITE);
-		rbG18.setBounds(722, 343, 25, 25);
-		frame.getContentPane().add(rbG18);
+		rbG18.setBounds(728, 361, 25, 25);
+		frmDashboardmachineLrtkorat.getContentPane().add(rbG18);
 		
 		JRadioButton rbG19 = new JRadioButton("");
+		rbG19.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				destination = "G19";
+				status = cl.getStationID();
+				c.MoneyCheck(status,destination);
+				c.setStation();
+				destinat.setText(c.getStationNameEN());
+				
+				opPrice.setText(Double.toString(c.getprice()));
+			}
+		});
 		rbG19.setBackground(Color.WHITE);
-		rbG19.setBounds(766, 370, 25, 25);
-		frame.getContentPane().add(rbG19);
+		rbG19.setBounds(772, 388, 25, 25);
+		frmDashboardmachineLrtkorat.getContentPane().add(rbG19);
 		
 		JRadioButton rbG20 = new JRadioButton("");
+		rbG20.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				destination = "G20";
+				status = cl.getStationID();
+				c.MoneyCheck(status,destination);
+				c.setStation();
+				destinat.setText(c.getStationNameEN());
+				
+				opPrice.setText(Double.toString(c.getprice()));
+			}
+		});
 		rbG20.setBackground(Color.WHITE);
-		rbG20.setBounds(887, 329, 25, 25);
-		frame.getContentPane().add(rbG20);
+		rbG20.setBounds(893, 347, 25, 25);
+		frmDashboardmachineLrtkorat.getContentPane().add(rbG20);
 		
 		JRadioButton rbG21 = new JRadioButton("");
+		rbG21.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				destination = "G21";
+				status = cl.getStationID();
+				c.MoneyCheck(status,destination);
+				c.setStation();
+				destinat.setText(c.getStationNameEN());
+				
+				opPrice.setText(Double.toString(c.getprice()));
+			}
+		});
 		rbG21.setBackground(Color.WHITE);
-		rbG21.setBounds(967, 329, 25, 25);
-		frame.getContentPane().add(rbG21);
+		rbG21.setBounds(973, 347, 25, 25);
+		frmDashboardmachineLrtkorat.getContentPane().add(rbG21);
 		
 		JRadioButton rbG22 = new JRadioButton("");
+		rbG22.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				destination = "G22";
+				status = cl.getStationID();
+				c.MoneyCheck(status,destination);
+				c.setStation();
+				destinat.setText(c.getStationNameEN());
+				
+				opPrice.setText(Double.toString(c.getprice()));
+			}
+		});
 		rbG22.setBackground(Color.WHITE);
-		rbG22.setBounds(1042, 329, 25, 25);
-		frame.getContentPane().add(rbG22);
+		rbG22.setBounds(1048, 347, 25, 25);
+		frmDashboardmachineLrtkorat.getContentPane().add(rbG22);
 		
 		JRadioButton rbG23 = new JRadioButton("");
+		rbG23.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				destination = "G23";
+				status = cl.getStationID();
+				c.MoneyCheck(status,destination);
+				c.setStation();
+				destinat.setText(c.getStationNameEN());
+				
+				opPrice.setText(Double.toString(c.getprice()));
+			}
+		});
 		rbG23.setBackground(Color.WHITE);
-		rbG23.setBounds(1117, 329, 25, 25);
-		frame.getContentPane().add(rbG23);
+		rbG23.setBounds(1123, 347, 25, 25);
+		frmDashboardmachineLrtkorat.getContentPane().add(rbG23);
 		
 		JRadioButton rbG24 = new JRadioButton("");
+		rbG24.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				destination = "G24";
+				status = cl.getStationID();
+				c.MoneyCheck(status,destination);
+				c.setStation();
+				destinat.setText(c.getStationNameEN());
+				
+				opPrice.setText(Double.toString(c.getprice()));
+			}
+		});
 		rbG24.setBackground(Color.WHITE);
-		rbG24.setBounds(1193, 329, 25, 25);
-		frame.getContentPane().add(rbG24);
+		rbG24.setBounds(1199, 347, 25, 25);
+		frmDashboardmachineLrtkorat.getContentPane().add(rbG24);
 		
 		JLabel imgmap = new JLabel();
-		imgmap.setBounds(0, 227, 1262, 300);
+		imgmap.setBounds(0, 244, 1262, 300);
 		path = "C:\\\\Java\\\\ProjectAdvOOAGroup1\\\\images\\\\map.png";
-		frame.getContentPane().add(imgmap);
+		frmDashboardmachineLrtkorat.getContentPane().add(imgmap);
 		MyImage = new ImageIcon(path);
 		img = MyImage.getImage();
 		newImg = img.getScaledInstance(imgmap.getWidth(), imgmap.getHeight(), Image.SCALE_SMOOTH);
 		image = new ImageIcon(newImg);
 		imgmap.setIcon(image);
 		
-		JLabel lblDestination = new JLabel("Destination:");
-		lblDestination.setFont(new Font("Dialog", Font.BOLD, 40));
-		lblDestination.setBounds(121, 659, 227, 44);
-		frame.getContentPane().add(lblDestination);
+		JLabel lblPerson = new JLabel("Person :");
+		lblPerson.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblPerson.setFont(new Font("SUT", Font.BOLD, 40));
+		lblPerson.setBounds(289, 775, 150, 44);
+		frmDashboardmachineLrtkorat.getContentPane().add(lblPerson);
 		
-		JLabel lblPerson = new JLabel("Person:");
-		lblPerson.setFont(new Font("Dialog", Font.BOLD, 40));
-		lblPerson.setBounds(198, 741, 150, 44);
-		frame.getContentPane().add(lblPerson);
-		
-		JLabel lblPrice = new JLabel("Price:");
-		lblPrice.setFont(new Font("Dialog", Font.BOLD, 40));
-		lblPrice.setBounds(233, 831, 112, 44);
-		frame.getContentPane().add(lblPrice);
+		JLabel lblPrice = new JLabel("Price :");
+		lblPrice.setFont(new Font("SUT", Font.BOLD, 80));
+		lblPrice.setBounds(244, 867, 180, 44);
+		frmDashboardmachineLrtkorat.getContentPane().add(lblPrice);
 		
 		JButton btnPay = new JButton("Pay");
 		btnPay.addActionListener(new ActionListener() {
@@ -262,14 +532,12 @@ public class DashboardMachine {
 				@SuppressWarnings("unused")
 				MemberLogin msl = new MemberLogin();
 				MemberLogin.main(null);
-				frame.dispose();
-				
 			}
 		});
 		btnPay.setBackground(Color.LIGHT_GRAY);
-		btnPay.setFont(new Font("Dialog", Font.BOLD, 40));
-		btnPay.setBounds(967, 654, 270, 55);
-		frame.getContentPane().add(btnPay);
+		btnPay.setFont(new Font("SUT", Font.BOLD, 50));
+		btnPay.setBounds(957, 600, 297, 80);
+		frmDashboardmachineLrtkorat.getContentPane().add(btnPay);
 		
 		JButton btnCancle = new JButton(" Cancle");
 		btnCancle.addActionListener(new ActionListener() {
@@ -277,35 +545,23 @@ public class DashboardMachine {
 			}
 		});
 		btnCancle.setBackground(Color.LIGHT_GRAY);
-		btnCancle.setFont(new Font("Dialog", Font.BOLD, 40));
-		btnCancle.setBounds(967, 790, 270, 55);
-		frame.getContentPane().add(btnCancle);
+		btnCancle.setFont(new Font("SUT", Font.BOLD, 50));
+		btnCancle.setBounds(1022, 838, 192, 60);
+		frmDashboardmachineLrtkorat.getContentPane().add(btnCancle);
 		
-		JButton btnWaletCheck = new JButton(" Wallet Check");
+		JButton btnWaletCheck = new JButton("WalletCheck");
 		btnWaletCheck.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				@SuppressWarnings("unused")
 				MemberWallet msl = new MemberWallet();
 				MemberWallet.main(null);
-				frame.dispose();
+				frmDashboardmachineLrtkorat.dispose();
 			}
 		});
 		btnWaletCheck.setBackground(Color.LIGHT_GRAY);
-		btnWaletCheck.setFont(new Font("Dialog", Font.BOLD, 35));
-		btnWaletCheck.setBounds(967, 868, 270, 55);
-		frame.getContentPane().add(btnWaletCheck);
-		
-		JLabel opDestination = new JLabel("??");
-		opDestination.setHorizontalAlignment(SwingConstants.LEFT);
-		opDestination.setFont(new Font("Dialog", Font.BOLD, 40));
-		opDestination.setBounds(359, 659, 298, 44);
-		frame.getContentPane().add(opDestination);
-		
-		JLabel opPrice = new JLabel("??");
-		opPrice.setHorizontalAlignment(SwingConstants.LEFT);
-		opPrice.setFont(new Font("Dialog", Font.BOLD, 40));
-		opPrice.setBounds(359, 831, 298, 44);
-		frame.getContentPane().add(opPrice);
+		btnWaletCheck.setFont(new Font("SUT", Font.BOLD, 50));
+		btnWaletCheck.setBounds(957, 703, 297, 80);
+		frmDashboardmachineLrtkorat.getContentPane().add(btnWaletCheck);
 		
 		
 		//Group the radio button.
@@ -326,67 +582,34 @@ public class DashboardMachine {
 		groupstation.add(rbG21);
 		groupstation.add(rbG22);
 		groupstation.add(rbG23);
-		groupstation.add(rbG24);		
-		
-		JLabel label_2 = new JLabel("??");
-		label_2.setFont(new Font("Dialog", Font.PLAIN, 40));
-		label_2.setBounds(805, 554, 326, 44);
-		frame.getContentPane().add(label_2);
-		
-		JLabel label_3 = new JLabel("Station Name : ");
-		label_3.setFont(new Font("Dialog", Font.BOLD, 40));
-		label_3.setBounds(497, 554, 295, 44);
-		frame.getContentPane().add(label_3);
-		
-		JLabel label_4 = new JLabel("Status :");
-		label_4.setFont(new Font("Dialog", Font.BOLD, 40));
-		label_4.setBounds(111, 554, 150, 44);
-		frame.getContentPane().add(label_4);
-		
-		JLabel label_5 = new JLabel("??");
-		label_5.setFont(new Font("Dialog", Font.PLAIN, 40));
-		label_5.setBounds(263, 554, 191, 44);
-		frame.getContentPane().add(label_5);
+		groupstation.add(rbG24);
 		
 		JSpinner spinner = new JSpinner();
-		spinner.setModel(new SpinnerNumberModel(1, 1, 5, 1));
-		spinner.setFont(new Font("Tahoma", Font.PLAIN, 40));
-		spinner.setBounds(360, 741, 80, 43);
-		frame.getContentPane().add(spinner);
-		
-		JButton btnUpdate = new JButton("Update");
-		btnUpdate.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				System.out.print(time);
+		spinner.addChangeListener(new ChangeListener() {
+			public void stateChanged(ChangeEvent e) {
+				int num = Integer.parseInt(spinner.getValue().toString());
+				
+				double sum = num * c.getprice();
+				//setText getString
+				opPrice.setText(Double.toString(sum));
 			}
 		});
-		btnUpdate.setFont(new Font("Dialog", Font.BOLD, 40));
-		btnUpdate.setBackground(Color.LIGHT_GRAY);
-		btnUpdate.setBounds(967, 722, 270, 55);
-		frame.getContentPane().add(btnUpdate);
+		spinner.setModel(new SpinnerNumberModel(1, 1, 5, 1));
+		spinner.setFont(new Font("SUT", Font.PLAIN, 40));
+		spinner.setBounds(449, 775, 80, 43);
+		frmDashboardmachineLrtkorat.getContentPane().add(spinner);
 		
-		lbClock = new JLabel("Date");
-		lbClock.setHorizontalAlignment(SwingConstants.LEFT);
-		lbClock.setFont(new Font("Dialog", Font.BOLD, 20));
-		lbClock.setBounds(25, 896, 557, 44);
-		frame.getContentPane().add(lbClock);
 		
-		JLabel bg2 = new JLabel("");
-		bg2.setBounds(10, 540, 1240, 79);
-		frame.getContentPane().add(bg2);
 		path = "C:\\\\Java\\\\ProjectAdvOOAGroup1\\\\images\\\\bg3.png";
-		frame.getContentPane().add(bg2);
 		MyImage = new ImageIcon(path);
 		img = MyImage.getImage();
-		newImg = img.getScaledInstance(bg2.getWidth(), bg2.getHeight(), Image.SCALE_SMOOTH);
 		image = new ImageIcon(newImg);
-		bg2.setIcon(image);
 		
 		JLabel bg4 = new JLabel("");
-		bg4.setBounds(10, 632, 924, 308);
-		frame.getContentPane().add(bg4);
+		bg4.setBounds(-36, 555, 970, 395);
+		frmDashboardmachineLrtkorat.getContentPane().add(bg4);
 		path = "C:\\\\Java\\\\ProjectAdvOOAGroup1\\\\images\\\\bg3.png";
-		frame.getContentPane().add(bg4);
+		frmDashboardmachineLrtkorat.getContentPane().add(bg4);
 		MyImage = new ImageIcon(path);
 		img = MyImage.getImage();
 		newImg = img.getScaledInstance(bg4.getWidth(), bg4.getHeight(), Image.SCALE_SMOOTH);
@@ -394,14 +617,35 @@ public class DashboardMachine {
 		bg4.setIcon(image);
 		
 		JLabel bg3 = new JLabel("");
-		bg3.setBounds(946, 632, 304, 308);
-		frame.getContentPane().add(bg3);
+		bg3.setBounds(946, 555, 342, 395);
+		frmDashboardmachineLrtkorat.getContentPane().add(bg3);
 		path = "C:\\\\Java\\\\ProjectAdvOOAGroup1\\\\images\\\\bg3.png";
-		frame.getContentPane().add(bg3);
+		frmDashboardmachineLrtkorat.getContentPane().add(bg3);
 		MyImage = new ImageIcon(path);
 		img = MyImage.getImage();
 		newImg = img.getScaledInstance(bg3.getWidth(), bg3.getHeight(), Image.SCALE_SMOOTH);
 		image = new ImageIcon(newImg);
 		bg3.setIcon(image);
+		
+		JLabel lbStationID_1 = new JLabel("-");
+		lbStationID_1.setHorizontalAlignment(SwingConstants.CENTER);
+		lbStationID_1.setFont(new Font("SUT", Font.PLAIN, 40));
+		lbStationID_1.setBounds(557, 189, 25, 44);
+		frmDashboardmachineLrtkorat.getContentPane().add(lbStationID_1);
+		
+		JLabel lbStationID_1_1 = new JLabel("-");
+		lbStationID_1_1.setHorizontalAlignment(SwingConstants.CENTER);
+		lbStationID_1_1.setFont(new Font("SUT", Font.PLAIN, 40));
+		lbStationID_1_1.setBounds(504, 655, 25, 44);
+		frmDashboardmachineLrtkorat.getContentPane().add(lbStationID_1_1);
+		
+
+		
+		TicketPrice tp2 = new TicketPrice();
+		tp2.MoneyCheck(stdid, destination);
+		
+		System.out.print(stdid);
+		System.out.print(status);
+		//System.out.println(destination);
 	}
 }

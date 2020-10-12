@@ -22,10 +22,11 @@ import javax.swing.UIManager;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Toolkit;
+import javax.swing.SwingConstants;
 
 public class MemberLogin {
 
-	private JFrame frame;
+	private JFrame frmMemberloginLrtkorat;
 	private JTextField txtUsername;
 	private JPasswordField txtPin;
 	private String path;
@@ -42,7 +43,7 @@ public class MemberLogin {
 			public void run() {
 				try {
 					MemberLogin window = new MemberLogin();
-					window.frame.setVisible(true);
+					window.frmMemberloginLrtkorat.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -61,41 +62,42 @@ public class MemberLogin {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame();
-		frame.setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Java\\ProjectAdvOOAGroup1\\images\\LRTLOGO2.png"));
-		frame.setTitle("Member Wallet Login");
-		frame.setBounds(100, 100, 566, 466);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
+		frmMemberloginLrtkorat = new JFrame();
+		frmMemberloginLrtkorat.setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Java\\ProjectAdvOOAGroup1\\images\\LRTLOGO2.png"));
+		frmMemberloginLrtkorat.setTitle("MemberLogin - LRTKORAT");
+		frmMemberloginLrtkorat.setBounds(100, 100, 566, 466);
+		frmMemberloginLrtkorat.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmMemberloginLrtkorat.getContentPane().setLayout(null);
 		
 		
-		JLabel lblMemberLogin = new JLabel("MEMBER LOGIN");
+		JLabel lblMemberLogin = new JLabel("MEMBER LOGIN FOR PAY");
+		lblMemberLogin.setHorizontalAlignment(SwingConstants.CENTER);
 		lblMemberLogin.setForeground(UIManager.getColor("Button.disabledShadow"));
 		lblMemberLogin.setBackground(UIManager.getColor("Button.disabledShadow"));
-		lblMemberLogin.setFont(new Font("CordiaUPC", Font.BOLD, 60));
-		lblMemberLogin.setBounds(192, 26, 322, 71);
-		frame.getContentPane().add(lblMemberLogin);
+		lblMemberLogin.setFont(new Font("SUT", Font.BOLD, 35));
+		lblMemberLogin.setBounds(179, 23, 322, 62);
+		frmMemberloginLrtkorat.getContentPane().add(lblMemberLogin);
 		
 		txtUsername = new JTextField();
-		txtUsername.setFont(new Font("CordiaUPC", Font.BOLD, 40));
+		txtUsername.setFont(new Font("SUT", Font.BOLD, 40));
 		txtUsername.setColumns(10);
 		txtUsername.setBounds(237, 149, 237, 43);
-		frame.getContentPane().add(txtUsername);
+		frmMemberloginLrtkorat.getContentPane().add(txtUsername);
 		
 		txtPin = new JPasswordField();
-		txtPin.setFont(new Font("CordiaUPC", Font.BOLD, 40));
+		txtPin.setFont(new Font("SUT", Font.BOLD, 40));
 		txtPin.setBounds(237, 208, 131, 42);
-		frame.getContentPane().add(txtPin);
+		frmMemberloginLrtkorat.getContentPane().add(txtPin);
 		
 		JLabel lblPin = new JLabel("PIN");
 		lblPin.setFont(new Font("CordiaUPC", Font.BOLD, 40));
 		lblPin.setBounds(171, 204, 54, 50);
-		frame.getContentPane().add(lblPin);
+		frmMemberloginLrtkorat.getContentPane().add(lblPin);
 		
 		JLabel lblPhone = new JLabel("Phone NO");
 		lblPhone.setFont(new Font("CordiaUPC", Font.BOLD, 40));
 		lblPhone.setBounds(94, 145, 131, 50);
-		frame.getContentPane().add(lblPhone);
+		frmMemberloginLrtkorat.getContentPane().add(lblPhone);
 		
 		JButton btLogin = new JButton("Pay");
 		btLogin.setBackground(Color.LIGHT_GRAY);
@@ -107,7 +109,7 @@ public class MemberLogin {
 		});
 		btLogin.setFont(new Font("CordiaUPC", Font.BOLD, 40));
 		btLogin.setBounds(154, 347, 141, 44);
-		frame.getContentPane().add(btLogin);
+		frmMemberloginLrtkorat.getContentPane().add(btLogin);
 		
 		JButton btExit = new JButton("Cancle");
 		btExit.addActionListener(new ActionListener() {
@@ -115,19 +117,19 @@ public class MemberLogin {
 				@SuppressWarnings("unused")
 				DashboardMachine dbm = new DashboardMachine();
 				DashboardMachine.main(null);
-				frame.dispose();
+				frmMemberloginLrtkorat.dispose();
 			}
 		});
 		btExit.setForeground(Color.BLACK);
 		btExit.setFont(new Font("CordiaUPC", Font.BOLD, 40));
 		btExit.setBackground(SystemColor.activeCaption);
 		btExit.setBounds(383, 347, 131, 44);
-		frame.getContentPane().add(btExit);
+		frmMemberloginLrtkorat.getContentPane().add(btExit);
 		
 		JLabel logo;
 		logo = new JLabel();
-		logo.setBounds(28, 4, 93, 117);
-		frame.getContentPane().add(logo);
+		logo.setBounds(97, 11, 72, 93);
+		frmMemberloginLrtkorat.getContentPane().add(logo);
 		path = "C:\\\\Java\\\\ProjectAdvOOAGroup1\\\\images\\\\LRTLOGO1.png";
 		MyImage = new ImageIcon(path);
 		img = MyImage.getImage();
@@ -137,28 +139,28 @@ public class MemberLogin {
 		
 		JLabel lblWallet = new JLabel("Wallet:");
 		lblWallet.setFont(new Font("CordiaUPC", Font.BOLD, 40));
-		lblWallet.setBounds(336, 272, 86, 50);
-		frame.getContentPane().add(lblWallet);
+		lblWallet.setBounds(328, 338, 86, 50);
+		frmMemberloginLrtkorat.getContentPane().add(lblWallet);
 		
 		JLabel inputWallet = new JLabel("??");
 		inputWallet.setFont(new Font("CordiaUPC", Font.BOLD, 40));
-		inputWallet.setBounds(430, 272, 106, 50);
-		frame.getContentPane().add(inputWallet);
+		inputWallet.setBounds(422, 338, 106, 50);
+		frmMemberloginLrtkorat.getContentPane().add(inputWallet);
 		
 		JLabel inputName = new JLabel("??");
 		inputName.setFont(new Font("CordiaUPC", Font.BOLD, 40));
-		inputName.setBounds(131, 275, 164, 50);
-		frame.getContentPane().add(inputName);
+		inputName.setBounds(123, 341, 164, 50);
+		frmMemberloginLrtkorat.getContentPane().add(inputName);
 		
 		JLabel lblName = new JLabel("Name:");
 		lblName.setFont(new Font("CordiaUPC", Font.BOLD, 40));
-		lblName.setBounds(49, 272, 86, 50);
-		frame.getContentPane().add(lblName);
+		lblName.setBounds(41, 338, 86, 50);
+		frmMemberloginLrtkorat.getContentPane().add(lblName);
 		
 		JLabel label = new JLabel();
 		label.setBackground(SystemColor.activeCaptionBorder);
-		label.setBounds(0, 133, 548, 201);
-		frame.getContentPane().add(label);
+		label.setBounds(0, 115, 548, 167);
+		frmMemberloginLrtkorat.getContentPane().add(label);
 		path = "C:\\\\Java\\\\ProjectAdvOOAGroup1\\\\images\\\\3143170.jpg";
 		MyImage = new ImageIcon(path);
 		img = MyImage.getImage();
@@ -169,7 +171,7 @@ public class MemberLogin {
 		//Background
 		JLabel img_bg = new JLabel();
 		img_bg.setBounds(0, 0, 548, 419);
-		frame.getContentPane().add(img_bg);
+		frmMemberloginLrtkorat.getContentPane().add(img_bg);
 		path = "C:\\\\Java\\\\ProjectAdvOOAGroup1\\\\images\\\\1299.jpg";
 		MyImage = new ImageIcon(path);
 		img = MyImage.getImage();

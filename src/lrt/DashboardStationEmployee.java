@@ -91,24 +91,27 @@ public class DashboardStationEmployee extends CheckLogin{
 		
 		JLabel lblOriginstation = new JLabel("Station Name : ");
 		lblOriginstation.setFont(new Font("SUT", Font.BOLD, 40));
-		lblOriginstation.setBounds(377, 261, 228, 44);
+		lblOriginstation.setBounds(288, 261, 629, 44);
 		frmDashboardstationemployees.getContentPane().add(lblOriginstation);
 		
 		JLabel lbOriginStation = new JLabel();
-		//stdname = cl.getStationName();
+		stdname = cl.getStationName();
+		//System.out.print(stdname);
 		lbOriginStation.setText(stdname);
 		lbOriginStation.setFont(new Font("SUT", Font.PLAIN, 40));
-		lbOriginStation.setBounds(593, 261, 326, 44);
+		lbOriginStation.setBounds(504, 261, 541, 44);
 		frmDashboardstationemployees.getContentPane().add(lbOriginStation);
 		
 		JLabel lblZone = new JLabel("Zone : ");
 		lblZone.setFont(new Font("SUT", Font.BOLD, 40));
-		lblZone.setBounds(938, 261, 108, 44);
+		lblZone.setBounds(1028, 260, 108, 44);
 		frmDashboardstationemployees.getContentPane().add(lblZone);
 		
-		JLabel lbZone = new JLabel("??");
+		JLabel lbZone = new JLabel();
+		stdzone = cl.getStationZone();
+		lbZone.setText(stdzone);
 		lbZone.setFont(new Font("SUT", Font.PLAIN, 40));
-		lbZone.setBounds(1056, 261, 153, 44);
+		lbZone.setBounds(1130, 260, 121, 44);
 		frmDashboardstationemployees.getContentPane().add(lbZone);
 		
 		JButton btnRegisterMember = new JButton(" Register");
@@ -125,6 +128,14 @@ public class DashboardStationEmployee extends CheckLogin{
 		frmDashboardstationemployees.getContentPane().add(btnAddWaletMember);
 		
 		JButton btnLrtKoratTicket = new JButton(" Ticket Machine");
+		btnLrtKoratTicket.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				@SuppressWarnings("unused")
+				DashboardMachine dm = new DashboardMachine();
+				DashboardMachine.main(null);
+				frmDashboardstationemployees.setVisible(false);
+			}
+		});
 		btnLrtKoratTicket.setIcon(new ImageIcon("C:\\Java\\ProjectAdvOOAGroup1\\images\\business_ticket_2363.png"));
 		btnLrtKoratTicket.setFont(new Font("SUT", Font.BOLD, 60));
 		btnLrtKoratTicket.setBounds(303, 359, 639, 100);

@@ -15,7 +15,7 @@ public class CheckLogin {
 	ResultSet rsRead;
 	public String std2, pass2, bom;
 	int check;
-	String a, b, c;
+	public static String a, b, c;
 	
 	
 	@SuppressWarnings("static-access")
@@ -40,7 +40,9 @@ public class CheckLogin {
 	
 	private void chkLogin() {
 		try{
+			
 			connectdb();
+			
 			 rsRead = st.executeQuery("SELECT * FROM Station ORDER BY Station_NO ASC");
 			 
 			 while(rsRead.next()) {
@@ -53,9 +55,6 @@ public class CheckLogin {
 							 a = rsRead.getString("Station_ID");
 							 b = rsRead.getString("Station_NameEN");
 							 c = rsRead.getString("Station_Zone");
-							 //System.out.println(a);
-							 //System.out.println(b);
-							 //System.out.println(c);
 						 }
 					 }
 				 }

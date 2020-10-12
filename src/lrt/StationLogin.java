@@ -132,7 +132,7 @@ public class StationLogin {
 					@SuppressWarnings("unused")
 					DashboardStationEmployee dse = new DashboardStationEmployee();
 					DashboardStationEmployee.main(null);
-					frmStationloginLrtkorat.dispose();
+					frmStationloginLrtkorat.setVisible(false);
 					
 				}else {
 					JFrame f = new JFrame();  
