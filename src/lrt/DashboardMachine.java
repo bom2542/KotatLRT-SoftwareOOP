@@ -35,6 +35,8 @@ public class DashboardMachine extends DashboardStationEmployee {
 	private ImageIcon image;
 	private JLabel lbClock;
 	private String destination="", status="";
+	private double sum=0;
+	private int num=1;
 	
 	TicketPrice c = new TicketPrice();
 	ButtonGroup groupstation = new ButtonGroup();
@@ -97,10 +99,19 @@ public class DashboardMachine extends DashboardStationEmployee {
 		clock();
 	}
 
+	
 	/**
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+		
+		@SuppressWarnings("unused")
+		CheckMem cm = new CheckMem();
+		@SuppressWarnings("unused")
+		JFrame f = new JFrame(); 
+		@SuppressWarnings("unused")
+		TicketPrice tp = new TicketPrice();
+		
 		frmDashboardmachineLrtkorat = new JFrame();
 		frmDashboardmachineLrtkorat.setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Java\\ProjectAdvOOAGroup1\\images\\LRTLOGO2.png"));
 		frmDashboardmachineLrtkorat.setTitle("DashboardMachine - LRTKORAT");
@@ -214,6 +225,20 @@ public class DashboardMachine extends DashboardStationEmployee {
 		lbOriginStation.setBounds(586, 189, 541, 44);
 		frmDashboardmachineLrtkorat.getContentPane().add(lbOriginStation);
 		
+		JSpinner spinner = new JSpinner();
+		spinner.addChangeListener(new ChangeListener() {
+			public void stateChanged(ChangeEvent e) {
+				num = Integer.parseInt(spinner.getValue().toString());
+				
+				sum = num * c.getprice();
+				opPrice.setText(Double.toString(sum));
+			}
+		});
+		spinner.setModel(new SpinnerNumberModel(1, 1, 5, 1));
+		spinner.setFont(new Font("SUT", Font.PLAIN, 40));
+		spinner.setBounds(449, 775, 80, 43);
+		frmDashboardmachineLrtkorat.getContentPane().add(spinner);
+		
 		JRadioButton rbG7 = new JRadioButton("");
 		rbG7.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -222,8 +247,9 @@ public class DashboardMachine extends DashboardStationEmployee {
 				c.MoneyCheck(status,destination);
 				c.setStation();
 				destinat.setText(c.getStationNameEN());
-				
-				opPrice.setText(Double.toString(c.getprice()));
+				sum = num * c.getprice();
+				c.setSumPrice(sum);
+				opPrice.setText(Double.toString(sum));
 			}
 		});
 		rbG7.setBackground(Color.WHITE);
@@ -240,7 +266,9 @@ public class DashboardMachine extends DashboardStationEmployee {
 				c.setStation();
 				destinat.setText(c.getStationNameEN());
 				
-				opPrice.setText(Double.toString(c.getprice()));
+				sum = num * c.getprice();
+				c.setSumPrice(sum);
+				opPrice.setText(Double.toString(sum));
 			}
 		});
 		rbG8.setBackground(Color.WHITE);
@@ -257,7 +285,9 @@ public class DashboardMachine extends DashboardStationEmployee {
 				c.setStation();
 				destinat.setText(c.getStationNameEN());
 				
-				opPrice.setText(Double.toString(c.getprice()));
+				sum = num * c.getprice();
+				c.setSumPrice(sum);
+				opPrice.setText(Double.toString(sum));
 			}
 		});
 		rbG9.setBackground(Color.WHITE);
@@ -273,7 +303,9 @@ public class DashboardMachine extends DashboardStationEmployee {
 				c.setStation();
 				destinat.setText(c.getStationNameEN());
 				
-				opPrice.setText(Double.toString(c.getprice()));
+				sum = num * c.getprice();
+				c.setSumPrice(sum);
+				opPrice.setText(Double.toString(sum));
 			}
 		});
 		rbG10.setBackground(Color.WHITE);
@@ -289,7 +321,9 @@ public class DashboardMachine extends DashboardStationEmployee {
 				c.setStation();
 				destinat.setText(c.getStationNameEN());
 				
-				opPrice.setText(Double.toString(c.getprice()));
+				sum = num * c.getprice();
+				c.setSumPrice(sum);
+				opPrice.setText(Double.toString(sum));
 			}
 		});
 		rbG11.setBackground(Color.WHITE);
@@ -305,7 +339,9 @@ public class DashboardMachine extends DashboardStationEmployee {
 				c.setStation();
 				destinat.setText(c.getStationNameEN());
 				
-				opPrice.setText(Double.toString(c.getprice()));
+				sum = num * c.getprice();
+				c.setSumPrice(sum);
+				opPrice.setText(Double.toString(sum));
 			}
 		});
 		rbG12.setBackground(Color.WHITE);
@@ -321,7 +357,9 @@ public class DashboardMachine extends DashboardStationEmployee {
 				c.setStation();
 				destinat.setText(c.getStationNameEN());
 				
-				opPrice.setText(Double.toString(c.getprice()));
+				sum = num * c.getprice();
+				c.setSumPrice(sum);
+				opPrice.setText(Double.toString(sum));
 			}
 		});
 		rbG13.setBackground(Color.WHITE);
@@ -336,8 +374,10 @@ public class DashboardMachine extends DashboardStationEmployee {
 				c.MoneyCheck(status,destination);
 				c.setStation();
 				destinat.setText(c.getStationNameEN());
-				
-				opPrice.setText(Double.toString(c.getprice()));
+
+				sum = num * c.getprice();
+				c.setSumPrice(sum);
+				opPrice.setText(Double.toString(sum));
 			}
 		});
 		rbG14.setBackground(Color.WHITE);
@@ -353,7 +393,9 @@ public class DashboardMachine extends DashboardStationEmployee {
 				c.setStation();
 				destinat.setText(c.getStationNameEN());
 				
-				opPrice.setText(Double.toString(c.getprice()));
+				sum = num * c.getprice();
+				c.setSumPrice(sum);
+				opPrice.setText(Double.toString(sum));
 			}
 		});
 		rbG15.setBackground(Color.WHITE);
@@ -369,7 +411,9 @@ public class DashboardMachine extends DashboardStationEmployee {
 				c.setStation();
 				destinat.setText(c.getStationNameEN());
 				
-				opPrice.setText(Double.toString(c.getprice()));
+				sum = num * c.getprice();
+				c.setSumPrice(sum);
+				opPrice.setText(Double.toString(sum));
 			}
 		});
 		rbG16.setBackground(Color.WHITE);
@@ -383,9 +427,12 @@ public class DashboardMachine extends DashboardStationEmployee {
 				status = cl.getStationID();
 				c.MoneyCheck(status,destination);
 				c.setStation();
+				
 				destinat.setText(c.getStationNameEN());
 				
-				opPrice.setText(Double.toString(c.getprice()));
+				sum = num * c.getprice();
+				c.setSumPrice(sum);
+				opPrice.setText(Double.toString(sum));
 			}
 		});
 		rbG17.setBackground(Color.WHITE);
@@ -401,7 +448,9 @@ public class DashboardMachine extends DashboardStationEmployee {
 				c.setStation();
 				destinat.setText(c.getStationNameEN());
 				
-				opPrice.setText(Double.toString(c.getprice()));
+				sum = num * c.getprice();
+				c.setSumPrice(sum);
+				opPrice.setText(Double.toString(sum));
 			}
 		});
 		rbG18.setBackground(Color.WHITE);
@@ -417,7 +466,9 @@ public class DashboardMachine extends DashboardStationEmployee {
 				c.setStation();
 				destinat.setText(c.getStationNameEN());
 				
-				opPrice.setText(Double.toString(c.getprice()));
+				sum = num * c.getprice();
+				c.setSumPrice(sum);
+				opPrice.setText(Double.toString(sum));
 			}
 		});
 		rbG19.setBackground(Color.WHITE);
@@ -433,7 +484,9 @@ public class DashboardMachine extends DashboardStationEmployee {
 				c.setStation();
 				destinat.setText(c.getStationNameEN());
 				
-				opPrice.setText(Double.toString(c.getprice()));
+				sum = num * c.getprice();
+				c.setSumPrice(sum);
+				opPrice.setText(Double.toString(sum));
 			}
 		});
 		rbG20.setBackground(Color.WHITE);
@@ -449,7 +502,9 @@ public class DashboardMachine extends DashboardStationEmployee {
 				c.setStation();
 				destinat.setText(c.getStationNameEN());
 				
-				opPrice.setText(Double.toString(c.getprice()));
+				sum = num * c.getprice();
+				c.setSumPrice(sum);
+				opPrice.setText(Double.toString(sum));
 			}
 		});
 		rbG21.setBackground(Color.WHITE);
@@ -465,7 +520,9 @@ public class DashboardMachine extends DashboardStationEmployee {
 				c.setStation();
 				destinat.setText(c.getStationNameEN());
 				
-				opPrice.setText(Double.toString(c.getprice()));
+				sum = num * c.getprice();
+				c.setSumPrice(sum);
+				opPrice.setText(Double.toString(sum));
 			}
 		});
 		rbG22.setBackground(Color.WHITE);
@@ -481,7 +538,9 @@ public class DashboardMachine extends DashboardStationEmployee {
 				c.setStation();
 				destinat.setText(c.getStationNameEN());
 				
-				opPrice.setText(Double.toString(c.getprice()));
+				sum = num * c.getprice();
+				c.setSumPrice(sum);
+				opPrice.setText(Double.toString(sum));
 			}
 		});
 		rbG23.setBackground(Color.WHITE);
@@ -497,7 +556,9 @@ public class DashboardMachine extends DashboardStationEmployee {
 				c.setStation();
 				destinat.setText(c.getStationNameEN());
 				
-				opPrice.setText(Double.toString(c.getprice()));
+				sum = num * c.getprice();
+				c.setSumPrice(sum);
+				opPrice.setText(Double.toString(sum));
 			}
 		});
 		rbG24.setBackground(Color.WHITE);
@@ -542,6 +603,7 @@ public class DashboardMachine extends DashboardStationEmployee {
 		JButton btnCancle = new JButton(" Cancle");
 		btnCancle.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				System.exit(0);
 			}
 		});
 		btnCancle.setBackground(Color.LIGHT_GRAY);
@@ -584,20 +646,6 @@ public class DashboardMachine extends DashboardStationEmployee {
 		groupstation.add(rbG23);
 		groupstation.add(rbG24);
 		
-		JSpinner spinner = new JSpinner();
-		spinner.addChangeListener(new ChangeListener() {
-			public void stateChanged(ChangeEvent e) {
-				int num = Integer.parseInt(spinner.getValue().toString());
-				
-				double sum = num * c.getprice();
-				//setText getString
-				opPrice.setText(Double.toString(sum));
-			}
-		});
-		spinner.setModel(new SpinnerNumberModel(1, 1, 5, 1));
-		spinner.setFont(new Font("SUT", Font.PLAIN, 40));
-		spinner.setBounds(449, 775, 80, 43);
-		frmDashboardmachineLrtkorat.getContentPane().add(spinner);
 		
 		
 		path = "C:\\\\Java\\\\ProjectAdvOOAGroup1\\\\images\\\\bg3.png";
@@ -644,8 +692,17 @@ public class DashboardMachine extends DashboardStationEmployee {
 		TicketPrice tp2 = new TicketPrice();
 		tp2.MoneyCheck(stdid, destination);
 		
-		System.out.print(stdid);
-		System.out.print(status);
-		//System.out.println(destination);
+		//System.out.print(stdid);
+		//System.out.print(status);
+		
+		
+		//System.out.println("Price: " + c.getSumPrice());
 	}
+	
+	public double getPriceTick() {
+		return sum;
+	}
+	
+	
+	
 }

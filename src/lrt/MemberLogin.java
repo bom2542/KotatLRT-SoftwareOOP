@@ -19,7 +19,16 @@ import java.awt.Color;
 
 import javax.swing.UIManager;
 
+import com.mysql.jdbc.Connection;
+import com.mysql.jdbc.Statement;
+
 import java.awt.event.ActionListener;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.awt.event.ActionEvent;
 import java.awt.Toolkit;
 import javax.swing.SwingConstants;
@@ -30,11 +39,20 @@ public class MemberLogin {
 	private JTextField txtUsername;
 	private JPasswordField txtPin;
 	private String path;
+	private JLabel getWallet;
 	private ImageIcon MyImage;
 	private Image img;
 	private Image newImg;
 	private ImageIcon image;
-
+	private static String user, pass;
+	private int check;
+	public double wprice, walle, sumprice;
+	
+	Statement st;
+	Connection con = null;
+	ResultSet rsRead;
+	
+	private String sql="";
 	/**
 	 * Launch the application.
 	 */
@@ -61,7 +79,25 @@ public class MemberLogin {
 	/**
 	 * Initialize the contents of the frame.
 	 */
+	@SuppressWarnings("deprecation")
 	private void initialize() {
+		
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/lrtkorat", "pharadornl_lrtkorat", "HSt1N9rb4Vpyl");
+			st = (Statement) con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_UPDATABLE);
+		}catch(SQLException e){
+			 System.out.println(e);
+		}catch(Exception ex) {
+			 System.out.println(ex);
+		}
+		
+		CheckMem cm = new CheckMem();
+		JFrame f = new JFrame(); 
+		TicketPrice tp = new TicketPrice();
+		@SuppressWarnings("unused")
+		DashboardMachine dm = new DashboardMachine();
+		
 		frmMemberloginLrtkorat = new JFrame();
 		frmMemberloginLrtkorat.setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Java\\ProjectAdvOOAGroup1\\images\\LRTLOGO2.png"));
 		frmMemberloginLrtkorat.setTitle("MemberLogin - LRTKORAT");
@@ -69,34 +105,58 @@ public class MemberLogin {
 		frmMemberloginLrtkorat.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmMemberloginLrtkorat.getContentPane().setLayout(null);
 		
+		getWallet = new JLabel();
+		getWallet.setForeground(Color.WHITE);
+		getWallet.setFont(new Font("SUT", Font.PLAIN, 24));
+		getWallet.setBounds(427, 252, 121, 50);
+		frmMemberloginLrtkorat.getContentPane().add(getWallet);
+		
+		JLabel lblWallet = new JLabel("Wallet : ");
+		lblWallet.setForeground(Color.WHITE);
+		lblWallet.setFont(new Font("SUT", Font.BOLD, 24));
+		lblWallet.setBounds(355, 252, 72, 50);
+		frmMemberloginLrtkorat.getContentPane().add(lblWallet);
+		
+		JLabel getName = new JLabel();
+		getName.setForeground(Color.WHITE);
+		getName.setFont(new Font("SUT", Font.PLAIN, 24));
+		getName.setBounds(96, 252, 284, 50);
+		frmMemberloginLrtkorat.getContentPane().add(getName);
+		
+		JLabel lblName = new JLabel("Name : ");
+		lblName.setForeground(Color.WHITE);
+		lblName.setFont(new Font("SUT", Font.BOLD, 24));
+		lblName.setBounds(22, 252, 64, 50);
+		frmMemberloginLrtkorat.getContentPane().add(lblName);
+		
 		
 		JLabel lblMemberLogin = new JLabel("MEMBER LOGIN FOR PAY");
 		lblMemberLogin.setHorizontalAlignment(SwingConstants.CENTER);
 		lblMemberLogin.setForeground(UIManager.getColor("Button.disabledShadow"));
 		lblMemberLogin.setBackground(UIManager.getColor("Button.disabledShadow"));
 		lblMemberLogin.setFont(new Font("SUT", Font.BOLD, 35));
-		lblMemberLogin.setBounds(179, 23, 322, 62);
+		lblMemberLogin.setBounds(178, 40, 322, 62);
 		frmMemberloginLrtkorat.getContentPane().add(lblMemberLogin);
 		
 		txtUsername = new JTextField();
 		txtUsername.setFont(new Font("SUT", Font.BOLD, 40));
 		txtUsername.setColumns(10);
-		txtUsername.setBounds(237, 149, 237, 43);
+		txtUsername.setBounds(237, 153, 237, 43);
 		frmMemberloginLrtkorat.getContentPane().add(txtUsername);
 		
 		txtPin = new JPasswordField();
 		txtPin.setFont(new Font("SUT", Font.BOLD, 40));
-		txtPin.setBounds(237, 208, 131, 42);
+		txtPin.setBounds(237, 212, 131, 42);
 		frmMemberloginLrtkorat.getContentPane().add(txtPin);
 		
-		JLabel lblPin = new JLabel("PIN");
-		lblPin.setFont(new Font("CordiaUPC", Font.BOLD, 40));
-		lblPin.setBounds(171, 204, 54, 50);
+		JLabel lblPin = new JLabel("PIN :");
+		lblPin.setFont(new Font("SUT", Font.BOLD, 40));
+		lblPin.setBounds(161, 208, 64, 50);
 		frmMemberloginLrtkorat.getContentPane().add(lblPin);
 		
-		JLabel lblPhone = new JLabel("Phone NO");
-		lblPhone.setFont(new Font("CordiaUPC", Font.BOLD, 40));
-		lblPhone.setBounds(94, 145, 131, 50);
+		JLabel lblPhone = new JLabel("Phone No :");
+		lblPhone.setFont(new Font("SUT", Font.BOLD, 40));
+		lblPhone.setBounds(73, 149, 152, 50);
 		frmMemberloginLrtkorat.getContentPane().add(lblPhone);
 		
 		JButton btLogin = new JButton("Pay");
@@ -104,11 +164,66 @@ public class MemberLogin {
 		btLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
-				JOptionPane.showMessageDialog(null,"Suscess","Wallet",JOptionPane.PLAIN_MESSAGE);
+				wprice = tp.getSumPrice();
+				walle = cm.getWall();
+				//0.0
+				//System.out.println("\nPrice : " + wprice);
+				//System.out.println("\nWallet : " + walle);
+				/*wprice = 40.00;
+				walle = 250.00;*/
+				
+				
+				
+				
+				PriceUpdate pu = new PriceUpdate();
+				pu.setPrice(wprice, walle);
+				
+				
+				getWallet.setText(Double.toString(pu.moneyupdate()));
+				/*if(walle > wprice) {
+					sumprice = walle - wprice;
+				}else if(walle < wprice) {
+					
+				}else {
+					
+				}*/
+				
+				int checking = pu.getError();
+				if(checking == 0) {
+					JOptionPane.showMessageDialog(null,"Money not enough. You have " + walle ,"Wallet Conclusion",JOptionPane.PLAIN_MESSAGE);
+					frmMemberloginLrtkorat.setVisible(false);
+					
+				}else if(checking == 1) {
+					JOptionPane.showMessageDialog(null,"Remening Wallet of you : " + walle,"Wallet Conclusion",JOptionPane.PLAIN_MESSAGE);
+					frmMemberloginLrtkorat.setVisible(false);
+					
+				
+				}
+				
+				DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+				Date date = new Date();
+				
+				String date2 = dateFormat.format(date);
+				String tels2 = pu.getTel();
+				String so = dm.getStationID();
+				String sd1 = tp.getDesination();
+				double tpx = tp.getSumPrice();
+				
+				System.out.println(date2 + "\n" + tels2 + "\n" + so + "\n" + sd1 + "\n" + tpx);
+				
+				
+				try {
+					sql = "INSERT INTO ticket(Ticket_Date, Member_Tel, Station_Origin_ID, Station_Destination_ID, Ticket_Price) VALUES ('" + date2 + "','"+ tels2 + "','"+ so +"','"+ sd1 +"',"+ tpx +")";
+					st.executeUpdate(sql);
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				//JOptionPane.showMessageDialog(null,"Suscess","Wallet",JOptionPane.PLAIN_MESSAGE);
 			}
 		});
-		btLogin.setFont(new Font("CordiaUPC", Font.BOLD, 40));
-		btLogin.setBounds(154, 347, 141, 44);
+		btLogin.setFont(new Font("SUT", Font.BOLD, 40));
+		btLogin.setBounds(190, 322, 160, 50);
 		frmMemberloginLrtkorat.getContentPane().add(btLogin);
 		
 		JButton btExit = new JButton("Cancle");
@@ -121,14 +236,54 @@ public class MemberLogin {
 			}
 		});
 		btExit.setForeground(Color.BLACK);
-		btExit.setFont(new Font("CordiaUPC", Font.BOLD, 40));
+		btExit.setFont(new Font("SUT", Font.BOLD, 30));
 		btExit.setBackground(SystemColor.activeCaption);
-		btExit.setBounds(383, 347, 131, 44);
+		btExit.setBounds(427, 377, 113, 39);
 		frmMemberloginLrtkorat.getContentPane().add(btExit);
+		
+		JButton btnLogin = new JButton("Login");
+		btLogin.hide();
+		btnLogin.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				//PriceUpdate pu = new PriceUpdate();
+				
+				user = txtUsername.getText();
+				pass = txtPin.getText();
+				
+				cm.setCheckMem(user, pass);
+				
+				check = cm.getCheckMem(); 
+				if(check == 1) {
+					btnLogin.hide();
+					String name = cm.getName();
+					String wallet = cm.getWallet();
+					getName.setText(name);
+					getWallet.setText(wallet);
+					txtUsername.setEnabled(false);
+					txtPin.setEnabled(false);
+					
+					
+					
+					JOptionPane.showMessageDialog(f,"Welcome ! " + name + "\nYour Wallet : " + wallet + " THB","MemberLogin - LRTKORAT",JOptionPane.INFORMATION_MESSAGE); 
+					btLogin.show();
+				}else {
+				    JOptionPane.showMessageDialog(f,"Login Failed !!!","MemberLogin - LRTKORAT",JOptionPane.ERROR_MESSAGE);   
+				}
+				//check = cm.getCheckMem();
+				//System.out.println(check);
+				//btnLogin.hide();
+				//btLogin.show();
+			}
+		});
+		btnLogin.setFont(new Font("SUT", Font.BOLD, 40));
+		btnLogin.setBackground(Color.LIGHT_GRAY);
+		btnLogin.setBounds(165, 316, 213, 62);
+		frmMemberloginLrtkorat.getContentPane().add(btnLogin);
 		
 		JLabel logo;
 		logo = new JLabel();
-		logo.setBounds(97, 11, 72, 93);
+		logo.setBounds(96, 28, 72, 93);
 		frmMemberloginLrtkorat.getContentPane().add(logo);
 		path = "C:\\\\Java\\\\ProjectAdvOOAGroup1\\\\images\\\\LRTLOGO1.png";
 		MyImage = new ImageIcon(path);
@@ -137,29 +292,9 @@ public class MemberLogin {
 		image = new ImageIcon(newImg);
 		logo.setIcon(image);
 		
-		JLabel lblWallet = new JLabel("Wallet:");
-		lblWallet.setFont(new Font("CordiaUPC", Font.BOLD, 40));
-		lblWallet.setBounds(328, 338, 86, 50);
-		frmMemberloginLrtkorat.getContentPane().add(lblWallet);
-		
-		JLabel inputWallet = new JLabel("??");
-		inputWallet.setFont(new Font("CordiaUPC", Font.BOLD, 40));
-		inputWallet.setBounds(422, 338, 106, 50);
-		frmMemberloginLrtkorat.getContentPane().add(inputWallet);
-		
-		JLabel inputName = new JLabel("??");
-		inputName.setFont(new Font("CordiaUPC", Font.BOLD, 40));
-		inputName.setBounds(123, 341, 164, 50);
-		frmMemberloginLrtkorat.getContentPane().add(inputName);
-		
-		JLabel lblName = new JLabel("Name:");
-		lblName.setFont(new Font("CordiaUPC", Font.BOLD, 40));
-		lblName.setBounds(41, 338, 86, 50);
-		frmMemberloginLrtkorat.getContentPane().add(lblName);
-		
 		JLabel label = new JLabel();
 		label.setBackground(SystemColor.activeCaptionBorder);
-		label.setBounds(0, 115, 548, 167);
+		label.setBounds(0, 132, 548, 170);
 		frmMemberloginLrtkorat.getContentPane().add(label);
 		path = "C:\\\\Java\\\\ProjectAdvOOAGroup1\\\\images\\\\3143170.jpg";
 		MyImage = new ImageIcon(path);

@@ -10,13 +10,25 @@ import java.awt.Image;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
+import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import com.toedter.calendar.JDateChooser;
+
 import java.awt.Color;
 import java.awt.SystemColor;
 import javax.swing.SwingConstants;
 import java.awt.Toolkit;
+import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.awt.event.ActionEvent;
+import javax.swing.JTextPane;
 
 public class StationMemberRegister {
 
@@ -24,11 +36,19 @@ public class StationMemberRegister {
 	private JTextField txtName;
 	private JTextField txtTell;
 	private JPasswordField txtPin;
+	private JTextPane textPaneAddress;
 	public String path;
 	public ImageIcon MyImage;
 	public Image img;
 	public Image newImg;
 	public ImageIcon image;
+	
+	Statement st;
+	Connection con = null;
+	ResultSet rsRead;
+	String sql="",date,txt="";
+	
+	ButtonGroup gender = new ButtonGroup();
 
 	/**
 	 * Launch the application.
@@ -57,6 +77,17 @@ public class StationMemberRegister {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+		
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/lrtkorat", "pharadornl_lrtkorat", "HSt1N9rb4Vpyl");
+			st = (Statement) con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_UPDATABLE);
+		}catch(SQLException e){
+			 System.out.println(e);
+		}catch(Exception ex) {
+			 System.out.println(ex);
+		}
+		
 		frmMemberregisterLrtkorat = new JFrame();
 		frmMemberregisterLrtkorat.setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Java\\ProjectAdvOOAGroup1\\images\\LRTLOGO2.png"));
 		frmMemberregisterLrtkorat.setTitle("MemberRegister - LRTKORAT");
@@ -108,27 +139,32 @@ public class StationMemberRegister {
 		lblSex.setBounds(351, 398, 67, 44);
 		frmMemberregisterLrtkorat.getContentPane().add(lblSex);
 		
-		JLabel lblBrihtday = new JLabel("BIRTHDAY:");
-		lblBrihtday.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		lblBrihtday.setBounds(262, 455, 159, 44);
-		frmMemberregisterLrtkorat.getContentPane().add(lblBrihtday);
-		
 		JLabel lblTellNo = new JLabel("TELL NO:");
 		lblTellNo.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		lblTellNo.setBounds(288, 511, 135, 44);
+		lblTellNo.setBounds(286, 453, 135, 44);
 		frmMemberregisterLrtkorat.getContentPane().add(lblTellNo);
 		
 		JLabel lblPinDigit = new JLabel("PIN 6 digit:");
 		lblPinDigit.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		lblPinDigit.setBounds(262, 568, 169, 44);
+		lblPinDigit.setBounds(260, 510, 169, 44);
 		frmMemberregisterLrtkorat.getContentPane().add(lblPinDigit);
 		
 		JRadioButton Gender1 = new JRadioButton("  MALE");
+		Gender1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				txt = "Male";
+			}
+		});
 		Gender1.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		Gender1.setBounds(472, 408, 127, 25);
 		frmMemberregisterLrtkorat.getContentPane().add(Gender1);
 		
 		JRadioButton Gender2 = new JRadioButton("  FAMALE");
+		Gender2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				txt = "Famale";
+			}
+		});
 		Gender2.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		Gender2.setBounds(624, 408, 166, 25);
 		frmMemberregisterLrtkorat.getContentPane().add(Gender2);
@@ -142,28 +178,65 @@ public class StationMemberRegister {
 		txtTell = new JTextField();
 		txtTell.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		txtTell.setColumns(10);
-		txtTell.setBounds(455, 511, 238, 40);
+		txtTell.setBounds(453, 453, 238, 40);
 		frmMemberregisterLrtkorat.getContentPane().add(txtTell);
 		
 		txtPin = new JPasswordField();
-		txtPin.setBounds(455, 577, 118, 40);
+		txtPin.setBounds(453, 519, 118, 40);
 		frmMemberregisterLrtkorat.getContentPane().add(txtPin);
 		
-		JDateChooser dateChooser = new JDateChooser();
-		dateChooser.setBounds(455, 455, 220, 40);
-		frmMemberregisterLrtkorat.getContentPane().add(dateChooser);
+		textPaneAddress = new JTextPane();
+		textPaneAddress.setBounds(454, 570, 413, 74);
+		frmMemberregisterLrtkorat.getContentPane().add(textPaneAddress);
 		
 		JButton btnRegister = new JButton("REGISTER");
+		btnRegister.addActionListener(new ActionListener() {
+			@SuppressWarnings("deprecation")
+			public void actionPerformed(ActionEvent e) {
+				DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+				Date date = new Date();
+				
+				
+		
+				
+				//System.out.println("Member_Tel: " + txtTell.getText() + "\nMember_Name: " + txtName.getText() + "\nMember_PIN: " + txtPin.getText() + "\nMember_Sex: " + txt + "\nMember_Start: " + dateFormat.format(date) + "\nMember_Address: " + textPaneAddress.getText());
+			
+				
+			
+				try {
+					sql = "insert into Member (Member_Tel,Member_Name,Member_PIN,Member_Sex,Member_Start,Member_Address	) values ('" + txtTell.getText() + "','" + txtName.getText() + "','" + txtPin.getText() + "','" + txt + "','" + dateFormat.format(date) + "','" + textPaneAddress.getText() +"')";
+					st.executeUpdate(sql);
+				} catch (SQLException el) {
+					// TODO Auto-generated catch block
+					System.out.print("SQL 236  " + el);;
+				}
+			}
+		});
 		btnRegister.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		btnRegister.setBounds(113, 668, 238, 65);
 		frmMemberregisterLrtkorat.getContentPane().add(btnRegister);
 		
 		JButton btnCancle = new JButton("Clear");
+		btnCancle.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				txtName.setText(null);
+				txtTell.setText(null);
+				txtPin.setText(null);
+				textPaneAddress.setText(null);
+				
+				
+			}
+		});
 		btnCancle.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		btnCancle.setBounds(525, 668, 147, 65);
 		frmMemberregisterLrtkorat.getContentPane().add(btnCancle);
 		
 		JButton button = new JButton("EXIT  ");
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.exit(0);
+			}
+		});
 		button.setHorizontalAlignment(SwingConstants.RIGHT);
 		button.setForeground(Color.BLACK);
 		button.setFont(new Font("Tahoma", Font.PLAIN, 30));
@@ -177,6 +250,15 @@ public class StationMemberRegister {
 		lblNewLabel_2_1.setFont(new Font("SUT", Font.BOLD, 50));
 		lblNewLabel_2_1.setBounds(396, 228, 554, 65);
 		frmMemberregisterLrtkorat.getContentPane().add(lblNewLabel_2_1);
+		
+		gender.add(Gender1);
+		gender.add(Gender2);
+		
+		JLabel lblAddress = new JLabel("Address:");
+		lblAddress.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		lblAddress.setBounds(292, 569, 129, 44);
+		frmMemberregisterLrtkorat.getContentPane().add(lblAddress);
+		
 		
 		
 	}

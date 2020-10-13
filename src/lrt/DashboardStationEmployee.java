@@ -115,6 +115,13 @@ public class DashboardStationEmployee extends CheckLogin{
 		frmDashboardstationemployees.getContentPane().add(lbZone);
 		
 		JButton btnRegisterMember = new JButton(" Register");
+		btnRegisterMember.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				StationMemberRegister show1 = new StationMemberRegister();
+				StationMemberRegister.main(null);
+				
+			}
+		});
 		btnRegisterMember.setIcon(new ImageIcon("C:\\Java\\ProjectAdvOOAGroup1\\images\\business_application_addmale_useradd_insert_add_user_client_2312.png"));
 		btnRegisterMember.setSelectedIcon(null);
 		btnRegisterMember.setFont(new Font("SUT", Font.BOLD, 60));
@@ -122,6 +129,10 @@ public class DashboardStationEmployee extends CheckLogin{
 		frmDashboardstationemployees.getContentPane().add(btnRegisterMember);
 		
 		JButton btnAddWaletMember = new JButton(" Wallet");
+		btnAddWaletMember.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btnAddWaletMember.setIcon(new ImageIcon("C:\\Java\\ProjectAdvOOAGroup1\\images\\wallet_payment_purchase_coin_cash_money_icon_141978.png"));
 		btnAddWaletMember.setFont(new Font("SUT", Font.BOLD, 60));
 		btnAddWaletMember.setBounds(636, 500, 306, 100);
@@ -144,7 +155,8 @@ public class DashboardStationEmployee extends CheckLogin{
 		JButton BtnLogoutStation = new JButton("Station");
 		BtnLogoutStation.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				StationLogin sta = new StationLogin();
+				StationLogin.main(null);
 			}
 		});
 		BtnLogoutStation.setIcon(new ImageIcon("C:\\Java\\ProjectAdvOOAGroup1\\images\\logout_icon_138409.png"));

@@ -9,16 +9,19 @@ import com.mysql.jdbc.Statement;
 
 public class TicketPrice{
 	
-	private String origin="",destition="",zone1="",zone2="",o1="",de="",dn="";
+	private String origin="",zone1="",zone2="",o1="",de="",dn="",de2="";
 	private double price=0,state=15;
+	public static double sum = 0.0;
 	Connection con = null;
 	Statement st;
 	ResultSet rsRead;
 	CheckLogin cl = new CheckLogin();
+	String destination;
 	
 	public void MoneyCheck(String o,String d){
 		origin = o;
-		destition = d;
+		destination = d;
+		
 	}
 	
 	
@@ -32,7 +35,6 @@ public class TicketPrice{
 		}catch(Exception ex) {
 			 System.out.println(ex);
 		}
-		
 	}
 	
 	public void setStation() {
@@ -56,10 +58,10 @@ public class TicketPrice{
 			while(rsRead.next()) {
 				de = rsRead.getString("Station_ID");
 				 if(rsRead != null) {
-					 if(de.equals(destition)) {
+					 if(de.equals(destination)) {
 						 dn = rsRead.getString("Station_NameEN");
 						 zone2 = rsRead.getString("Station_Zone");
-						 
+						 de2 = rsRead.getString("Station_ID");
 					 }
 				 }
 			 }
@@ -107,5 +109,20 @@ public class TicketPrice{
 	
 	public String getStationNameEN() {
 		return dn;
+	}
+	
+	@SuppressWarnings("static-access")
+	public void setSumPrice(double sum) {
+		this.sum = sum;
+		//System.out.println("Price: " + sum);
+	}
+	
+	public double getSumPrice() {
+		//System.out.println("\nOK : " + sum);
+		return sum;
+	}
+
+	public String getDesination() {
+		return destination;
 	}
 }
