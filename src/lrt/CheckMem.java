@@ -105,4 +105,9 @@ public class CheckMem {
 	public double getWall() {
 		return wal;
 	}
+	
+	public String getUser() {
+		return user;
+	}
+	
 }

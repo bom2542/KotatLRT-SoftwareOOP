@@ -6,24 +6,21 @@ import java.awt.Font;
 import java.awt.Image;
 import java.awt.SystemColor;
 import java.awt.Toolkit;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JPasswordField;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
-import javax.swing.UIManager;
 import javax.swing.JButton;
 
-public class Wallet {
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
-	private JFrame frame;
+public class Wallet extends DashboardStationEmployee{
+
+	private JFrame frmAddwalletLrtkorat;
 	
 	public String path;
 	public ImageIcon MyImage;
@@ -31,13 +28,13 @@ public class Wallet {
 	public Image newImg;
 	public ImageIcon image;
 
-	Statement st;
-	Connection con = null;
-	ResultSet rsRead;
-	String sql="",date,txt="";
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
+	
+	String date,txt="";
+	private JTextField textPhone;
+	private JTextField textWallet;
+	private JTextField textAddWallet;
+	private String phone = "";
+	private double wallet=0,sum=0,addwallet=0;
 	
 	/**
 	 * Launch the application.
@@ -47,7 +44,7 @@ public class Wallet {
 			public void run() {
 				try {
 					Wallet window = new Wallet();
-					window.frame.setVisible(true);
+					window.frmAddwalletLrtkorat.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -66,67 +63,110 @@ public class Wallet {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-
-		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/lrtkorat", "pharadornl_lrtkorat", "HSt1N9rb4Vpyl");
-			st = (Statement) con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_UPDATABLE);
-		}catch(SQLException e){
-			 System.out.println(e);
-		}catch(Exception ex) {
-			 System.out.println(ex);
-		}
+		//Database
 		
-		frame = new JFrame();
-		frame.setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Java\\ProjectAdvOOAGroup1\\images\\LRTLOGO2.png"));
-		frame.setTitle("Wallet - LRTKORAT");
-		frame.setBounds(100, 100, 566, 466);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
 		
-		JLabel lblNewLabel_2 = new JLabel("\u0E01\u0E33\u0E25\u0E31\u0E07\u0E1B\u0E23\u0E31\u0E1A\u0E1B\u0E23\u0E38\u0E07");
-		lblNewLabel_2.setForeground(Color.WHITE);
-		lblNewLabel_2.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_2.setFont(new Font("SUT", Font.BOLD, 40));
-		lblNewLabel_2.setBounds(178, 24, 306, 65);
-		frame.getContentPane().add(lblNewLabel_2);
+		WalletCheck Mwallet = new WalletCheck();
 		
-		JLabel lblNewLabel_2_1 = new JLabel("Wallet");
+		frmAddwalletLrtkorat = new JFrame();
+		frmAddwalletLrtkorat.setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Java\\ProjectAdvOOAGroup1\\images\\LRTLOGO2.png"));
+		frmAddwalletLrtkorat.setTitle("AddWallet - LRTKORAT");
+		frmAddwalletLrtkorat.setBounds(100, 100, 566, 466);
+		frmAddwalletLrtkorat.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmAddwalletLrtkorat.getContentPane().setLayout(null);
+		frmAddwalletLrtkorat.setLocationRelativeTo(null);
+		
+		JLabel lblNewLabel_1_2 = new JLabel("\u0E08\u0E33\u0E19\u0E27\u0E19\u0E40\u0E15\u0E34\u0E21 :");
+		lblNewLabel_1_2.setFont(new Font("SUT", Font.BOLD, 40));
+		lblNewLabel_1_2.setBounds(19, 279, 168, 41);
+		frmAddwalletLrtkorat.getContentPane().add(lblNewLabel_1_2);
+		
+		JLabel lblNewLabel_2_1 = new JLabel("\u0E40\u0E15\u0E34\u0E21\u0E40\u0E07\u0E34\u0E19\u0E25\u0E39\u0E01\u0E04\u0E49\u0E32");
 		lblNewLabel_2_1.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_2_1.setForeground(Color.WHITE);
 		lblNewLabel_2_1.setFont(new Font("SUT", Font.BOLD, 40));
-		lblNewLabel_2_1.setBounds(178, 73, 306, 65);
-		frame.getContentPane().add(lblNewLabel_2_1);
+		lblNewLabel_2_1.setBounds(184, 42, 306, 62);
+		frmAddwalletLrtkorat.getContentPane().add(lblNewLabel_2_1);
 		
-		textField = new JTextField();
-		textField.setBounds(239, 169, 164, 41);
-		frame.getContentPane().add(textField);
-		textField.setColumns(10);
+		textPhone = new JTextField();
+		textPhone.setFont(new Font("SUT", Font.PLAIN, 30));
+		textPhone.setBounds(197, 159, 257, 51);
+		frmAddwalletLrtkorat.getContentPane().add(textPhone);
+		textPhone.setColumns(10);
 		
-		JLabel lblNewLabel = new JLabel("Phone Member");
-		lblNewLabel.setBounds(24, 169, 205, 42);
+		JLabel lblNewLabel = new JLabel("\u0E40\u0E1A\u0E2D\u0E23\u0E4C\u0E42\u0E17\u0E23 :");
+		lblNewLabel.setBounds(50, 168, 128, 42);
 		lblNewLabel.setFont(new Font("SUT", Font.BOLD, 40));
-		frame.getContentPane().add(lblNewLabel);
+		frmAddwalletLrtkorat.getContentPane().add(lblNewLabel);
 		
-		JLabel lblNewLabel_1 = new JLabel("Wallet");
-		lblNewLabel_1.setBounds(140, 222, 98, 41);
+		JLabel lblNewLabel_1 = new JLabel("\u0E22\u0E2D\u0E14\u0E40\u0E01\u0E48\u0E32  :");
+		lblNewLabel_1.setBounds(50, 223, 128, 41);
 		lblNewLabel_1.setFont(new Font("SUT", Font.BOLD, 40));
-		frame.getContentPane().add(lblNewLabel_1);
+		frmAddwalletLrtkorat.getContentPane().add(lblNewLabel_1);
 		
-		textField_1 = new JTextField();
-		textField_1.setBounds(239, 221, 164, 41);
-		frame.getContentPane().add(textField_1);
-		textField_1.setColumns(10);
+		textWallet = new JTextField();
+		textWallet.setFont(new Font("SUT", Font.PLAIN, 30));
+		textWallet.setBounds(197, 222, 173, 42);
+		frmAddwalletLrtkorat.getContentPane().add(textWallet);
+		textWallet.setColumns(10);
+		textWallet.setEnabled(false);
 		
-		textField_2 = new JTextField();
-		textField_2.setColumns(10);
-		textField_2.setBounds(239, 274, 164, 41);
-		frame.getContentPane().add(textField_2);
+		textAddWallet = new JTextField();
+		textAddWallet.setFont(new Font("SUT", Font.PLAIN, 30));
+		textAddWallet.setColumns(10);
+		textAddWallet.setBounds(197, 282, 173, 51);
+		frmAddwalletLrtkorat.getContentPane().add(textAddWallet);
+		
+		JButton S = new JButton();
+		S.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				phone = textPhone.getText();
+				Mwallet.setMemberPhone(phone);
+				Mwallet.SelectCheck();
+				
+				wallet = Mwallet.getMemberWallet();
+				textWallet.setText(Double.toString(wallet));
+				
+			}
+		});
+		S.setIcon(new ImageIcon("C:\\Java\\ProjectAdvOOAGroup1\\images\\search.png"));
+		S.setBounds(464, 159, 72, 51);
+		frmAddwalletLrtkorat.getContentPane().add(S);
+		
+		JButton btnNewButton = new JButton("\u0E40\u0E15\u0E34\u0E21\u0E40\u0E07\u0E34\u0E19");
+		btnNewButton.setFont(new Font("SUT", Font.BOLD, 30));
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				addwallet = Double.parseDouble(textAddWallet.getText());
+				
+				sum = wallet + addwallet;
+				Mwallet.updateWallet(sum);
+
+				JFrame f = new JFrame(); 
+				JOptionPane.showMessageDialog(f,"Successfully of Add money member"); 
+			}
+		});
+		btnNewButton.setBounds(201, 360, 152, 53);
+		frmAddwalletLrtkorat.getContentPane().add(btnNewButton);
+		
+		JButton btnCancle = new JButton("\u0E22\u0E01\u0E40\u0E25\u0E34\u0E01");
+		btnCancle.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frmAddwalletLrtkorat.setVisible(false);
+				DashboardStationEmployee.main(null);
+			}
+		});
+		btnCancle.setFont(new Font("SUT", Font.PLAIN, 30));
+		btnCancle.setBounds(416, 366, 120, 41);
+		frmAddwalletLrtkorat.getContentPane().add(btnCancle);
+		
+		//BG
 		
 		JLabel logo;
 		logo = new JLabel();
 		logo.setBounds(96, 28, 72, 93);
-		frame.getContentPane().add(logo);
+		frmAddwalletLrtkorat.getContentPane().add(logo);
 		path = "C:\\\\Java\\\\ProjectAdvOOAGroup1\\\\images\\\\LRTLOGO1.png";
 		MyImage = new ImageIcon(path);
 		img = MyImage.getImage();
@@ -136,8 +176,8 @@ public class Wallet {
 		
 		JLabel label = new JLabel();
 		label.setBackground(SystemColor.activeCaptionBorder);
-		label.setBounds(0, 132, 548, 221);
-		frame.getContentPane().add(label);
+		label.setBounds(0, 132, 548, 223);
+		frmAddwalletLrtkorat.getContentPane().add(label);
 		path = "C:\\\\Java\\\\ProjectAdvOOAGroup1\\\\images\\\\3143170.jpg";
 		MyImage = new ImageIcon(path);
 		img = MyImage.getImage();
@@ -148,7 +188,7 @@ public class Wallet {
 		//Background
 		JLabel img_bg = new JLabel();
 		img_bg.setBounds(0, 0, 548, 419);
-		frame.getContentPane().add(img_bg);
+		frmAddwalletLrtkorat.getContentPane().add(img_bg);
 		path = "C:\\\\Java\\\\ProjectAdvOOAGroup1\\\\images\\\\1299.jpg";
 		MyImage = new ImageIcon(path);
 		img = MyImage.getImage();
@@ -156,13 +196,10 @@ public class Wallet {
 		image = new ImageIcon(newImg);
 		img_bg.setIcon(image);
 		
-		JButton btnNewButton = new JButton("New button");
-		btnNewButton.setBounds(258, 305, 89, 23);
-		frame.getContentPane().add(btnNewButton);
-		
-		
-
-		
+		JLabel lblNewLabel_1_1 = new JLabel("\u0E22\u0E2D\u0E14\u0E40\u0E07\u0E34\u0E19\u0E40\u0E01\u0E48\u0E32  :");
+		lblNewLabel_1_1.setFont(new Font("SUT", Font.BOLD, 40));
+		lblNewLabel_1_1.setBounds(344, 220, 164, 41);
+		frmAddwalletLrtkorat.getContentPane().add(lblNewLabel_1_1);
 		
 	}
 }

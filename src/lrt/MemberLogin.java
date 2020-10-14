@@ -33,7 +33,7 @@ import java.awt.event.ActionEvent;
 import java.awt.Toolkit;
 import javax.swing.SwingConstants;
 
-public class MemberLogin {
+public class MemberLogin extends DashboardStationEmployee{
 
 	private JFrame frmMemberloginLrtkorat;
 	private JTextField txtUsername;
@@ -47,6 +47,7 @@ public class MemberLogin {
 	private static String user, pass;
 	private int check;
 	public double wprice, walle, sumprice;
+	public String date2;
 	
 	Statement st;
 	Connection con = null;
@@ -95,7 +96,6 @@ public class MemberLogin {
 		CheckMem cm = new CheckMem();
 		JFrame f = new JFrame(); 
 		TicketPrice tp = new TicketPrice();
-		@SuppressWarnings("unused")
 		DashboardMachine dm = new DashboardMachine();
 		
 		frmMemberloginLrtkorat = new JFrame();
@@ -104,6 +104,7 @@ public class MemberLogin {
 		frmMemberloginLrtkorat.setBounds(100, 100, 566, 466);
 		frmMemberloginLrtkorat.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmMemberloginLrtkorat.getContentPane().setLayout(null);
+		frmMemberloginLrtkorat.setLocationRelativeTo(null);
 		
 		getWallet = new JLabel();
 		getWallet.setForeground(Color.WHITE);
@@ -190,14 +191,17 @@ public class MemberLogin {
 				
 				int checking = pu.getError();
 				if(checking == 0) {
-					JOptionPane.showMessageDialog(null,"Money not enough. You have " + walle ,"Wallet Conclusion",JOptionPane.PLAIN_MESSAGE);
+					JOptionPane.showMessageDialog(null,"Money not enough. You have " + Double.toString(pu.moneyupdate()) ,"Wallet Conclusion",JOptionPane.PLAIN_MESSAGE);
 					frmMemberloginLrtkorat.setVisible(false);
+					DashboardStationEmployee.main(null);
 					
 				}else if(checking == 1) {
-					JOptionPane.showMessageDialog(null,"Remening Wallet of you : " + walle,"Wallet Conclusion",JOptionPane.PLAIN_MESSAGE);
+					JOptionPane.showMessageDialog(null,"Remening Wallet of you : " + Double.toString(pu.moneyupdate()),"Wallet Conclusion",JOptionPane.PLAIN_MESSAGE);
 					frmMemberloginLrtkorat.setVisible(false);
-					
-				
+					@SuppressWarnings("unused")
+					Ticket tk = new Ticket();
+					Ticket.main(null);
+					frmMemberloginLrtkorat.setVisible(false);
 				}
 				
 				DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
@@ -209,7 +213,7 @@ public class MemberLogin {
 				String sd1 = tp.getDesination();
 				double tpx = tp.getSumPrice();
 				
-				System.out.println(date2 + "\n" + tels2 + "\n" + so + "\n" + sd1 + "\n" + tpx);
+				//System.out.println(date2 + "\n" + tels2 + "\n" + so + "\n" + sd1 + "\n" + tpx);
 				
 				
 				try {
@@ -223,7 +227,7 @@ public class MemberLogin {
 			}
 		});
 		btLogin.setFont(new Font("SUT", Font.BOLD, 40));
-		btLogin.setBounds(190, 322, 160, 50);
+		btLogin.setBounds(167, 316, 213, 62);
 		frmMemberloginLrtkorat.getContentPane().add(btLogin);
 		
 		JButton btExit = new JButton("Cancle");
@@ -294,7 +298,7 @@ public class MemberLogin {
 		
 		JLabel label = new JLabel();
 		label.setBackground(SystemColor.activeCaptionBorder);
-		label.setBounds(0, 132, 548, 170);
+		label.setBounds(0, 132, 560, 170);
 		frmMemberloginLrtkorat.getContentPane().add(label);
 		path = "C:\\\\Java\\\\ProjectAdvOOAGroup1\\\\images\\\\3143170.jpg";
 		MyImage = new ImageIcon(path);
@@ -305,7 +309,7 @@ public class MemberLogin {
 		
 		//Background
 		JLabel img_bg = new JLabel();
-		img_bg.setBounds(0, 0, 548, 419);
+		img_bg.setBounds(0, 0, 560, 427);
 		frmMemberloginLrtkorat.getContentPane().add(img_bg);
 		path = "C:\\\\Java\\\\ProjectAdvOOAGroup1\\\\images\\\\1299.jpg";
 		MyImage = new ImageIcon(path);
@@ -314,5 +318,9 @@ public class MemberLogin {
 		image = new ImageIcon(newImg);
 		img_bg.setIcon(image);
 		
+	}
+	
+	public String getDate() {
+		return date2;
 	}
 }

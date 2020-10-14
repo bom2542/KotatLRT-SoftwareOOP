@@ -17,16 +17,19 @@ import java.awt.Color;
 import java.awt.Toolkit;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.SwingConstants;
 
 public class MemberWallet {
 
-	private JFrame frame;
+	private JFrame frmCheckwalletLrtkorat;
 	private JTextField txtPhone;
 	private String path;
 	private ImageIcon MyImage;
 	private Image img;
 	private Image newImg;
 	private ImageIcon image;
+	private JLabel lbWallet;
+	
 
 	/**
 	 * Launch the application.
@@ -36,7 +39,7 @@ public class MemberWallet {
 			public void run() {
 				try {
 					MemberWallet window = new MemberWallet();
-					window.frame.setVisible(true);
+					window.frmCheckwalletLrtkorat.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -55,70 +58,83 @@ public class MemberWallet {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame();
-		frame.setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Java\\ProjectAdvOOAGroup1\\images\\LRTLOGO2.png"));
-		frame.setTitle("Member Wallet Check");
-		frame.setBounds(100, 100, 566, 466);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
+		WalletCheck wc = new WalletCheck();
+		
+		
+		frmCheckwalletLrtkorat = new JFrame();
+		frmCheckwalletLrtkorat.setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Java\\ProjectAdvOOAGroup1\\images\\LRTLOGO2.png"));
+		frmCheckwalletLrtkorat.setTitle("CheckWallet - LRTKORAT");
+		frmCheckwalletLrtkorat.setBounds(100, 100, 566, 466);
+		frmCheckwalletLrtkorat.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmCheckwalletLrtkorat.getContentPane().setLayout(null);
+		frmCheckwalletLrtkorat.setLocationRelativeTo(null);
 		
 		JLabel lblMemberWallet = new JLabel("Member Wallet");
 		lblMemberWallet.setForeground(Color.WHITE);
-		lblMemberWallet.setFont(new Font("CordiaUPC", Font.BOLD, 60));
-		lblMemberWallet.setBounds(162, 24, 314, 71);
-		frame.getContentPane().add(lblMemberWallet);
+		lblMemberWallet.setFont(new Font("SUT", Font.BOLD, 60));
+		lblMemberWallet.setBounds(179, 30, 314, 71);
+		frmCheckwalletLrtkorat.getContentPane().add(lblMemberWallet);
 		
 		txtPhone = new JTextField();
-		txtPhone.setFont(new Font("CordiaUPC", Font.BOLD, 40));
+		txtPhone.setFont(new Font("SUT", Font.PLAIN, 40));
 		txtPhone.setColumns(10);
-		txtPhone.setBounds(198, 166, 237, 43);
-		frame.getContentPane().add(txtPhone);
+		txtPhone.setBounds(154, 195, 237, 43);
+		frmCheckwalletLrtkorat.getContentPane().add(txtPhone);
 		
 		JButton btnCheck = new JButton("Check");
-		btnCheck.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		btnCheck.setBounds(345, 222, 131, 44);
-		frame.getContentPane().add(btnCheck);
+		btnCheck.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				wc.setMemberPhone(txtPhone.getText());
+				wc.SelectCheck();
+				
+				lbWallet.setText(Double.toString(wc.getMemberWallet()));
+			}
+		});
+		btnCheck.setFont(new Font("SUT", Font.BOLD, 30));
+		btnCheck.setBounds(414, 190, 99, 58);
+		frmCheckwalletLrtkorat.getContentPane().add(btnCheck);
 		
-		JLabel lblPhoneNo = new JLabel("Phone NO:");
-		lblPhoneNo.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		lblPhoneNo.setBounds(49, 165, 153, 44);
-		frame.getContentPane().add(lblPhoneNo);
+		JLabel lblPhoneNo = new JLabel("\u0E40\u0E1A\u0E2D\u0E23\u0E4C\u0E42\u0E17\u0E23 :");
+		lblPhoneNo.setFont(new Font("SUT", Font.BOLD, 40));
+		lblPhoneNo.setBounds(17, 194, 153, 44);
+		frmCheckwalletLrtkorat.getContentPane().add(lblPhoneNo);
 		
-		JLabel lblWallet = new JLabel("Wallet:");
-		lblWallet.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		lblWallet.setBounds(71, 279, 99, 44);
-		frame.getContentPane().add(lblWallet);
+		JLabel lblWallet = new JLabel("Wallet :");
+		lblWallet.setFont(new Font("SUT", Font.BOLD, 40));
+		lblWallet.setBounds(36, 271, 114, 44);
+		frmCheckwalletLrtkorat.getContentPane().add(lblWallet);
 		
-		JLabel lbWallet = new JLabel("??");
-		lbWallet.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		lbWallet.setBounds(171, 279, 131, 44);
-		frame.getContentPane().add(lbWallet);
+		lbWallet = new JLabel();
+		lbWallet.setHorizontalAlignment(SwingConstants.CENTER);
+		lbWallet.setFont(new Font("SUT", Font.BOLD, 50));
+		lbWallet.setBounds(160, 271, 131, 44);
+		frmCheckwalletLrtkorat.getContentPane().add(lbWallet);
 		
 		JLabel lblBaht = new JLabel("Baht");
-		lblBaht.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		lblBaht.setBounds(314, 279, 99, 44);
-		frame.getContentPane().add(lblBaht);
+		lblBaht.setFont(new Font("SUT", Font.BOLD, 30));
+		lblBaht.setBounds(314, 274, 99, 44);
+		frmCheckwalletLrtkorat.getContentPane().add(lblBaht);
 		
 		JButton btnBack = new JButton("Back");
 		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				@SuppressWarnings("unused")
+				/*@SuppressWarnings("unused")
 				DashboardMachine msl = new DashboardMachine();
-				DashboardMachine.main(null);
-				frame.dispose();
+				DashboardMachine.main(null);*/
+				frmCheckwalletLrtkorat.dispose();
 			}
 		});
 		btnBack.setForeground(Color.BLACK);
-		btnBack.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		btnBack.setFont(new Font("SUT", Font.BOLD, 30));
 		btnBack.setBackground(SystemColor.activeCaption);
 		btnBack.setBounds(12, 363, 131, 43);
-		frame.getContentPane().add(btnBack);
+		frmCheckwalletLrtkorat.getContentPane().add(btnBack);
 		
 		//Logo
 		JLabel logo;
 		logo = new JLabel();
-		logo.setBounds(28, 4, 93, 117);
-		frame.getContentPane().add(logo);
+		logo.setBounds(77, 11, 93, 117);
+		frmCheckwalletLrtkorat.getContentPane().add(logo);
 		path = "C:\\\\Java\\\\ProjectAdvOOAGroup1\\\\images\\\\LRTLOGO1.png";
 		MyImage = new ImageIcon(path);
 		img = MyImage.getImage();
@@ -129,8 +145,8 @@ public class MemberWallet {
 		//Bg-Containt
 		JLabel bd_c = new JLabel();
 		bd_c.setBackground(SystemColor.activeCaptionBorder);
-		bd_c.setBounds(0, 133, 548, 201);
-		frame.getContentPane().add(bd_c);
+		bd_c.setBounds(0, 133, 560, 219);
+		frmCheckwalletLrtkorat.getContentPane().add(bd_c);
 		path = "C:\\\\Java\\\\ProjectAdvOOAGroup1\\\\images\\\\3143170.jpg";
 		MyImage = new ImageIcon(path);
 		img = MyImage.getImage();
@@ -140,8 +156,8 @@ public class MemberWallet {
 		
 		//Background
 		JLabel img_bg = new JLabel();
-		img_bg.setBounds(0, 0, 548, 419);
-		frame.getContentPane().add(img_bg);
+		img_bg.setBounds(0, 0, 560, 443);
+		frmCheckwalletLrtkorat.getContentPane().add(img_bg);
 		path = "C:\\\\Java\\\\ProjectAdvOOAGroup1\\\\images\\\\1299.jpg";
 		MyImage = new ImageIcon(path);
 		img = MyImage.getImage();
@@ -149,5 +165,7 @@ public class MemberWallet {
 		image = new ImageIcon(newImg);
 		img_bg.setIcon(image);
 	}
+	
+	
 
 }

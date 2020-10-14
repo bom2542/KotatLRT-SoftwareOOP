@@ -58,6 +58,7 @@ public class DashboardStationEmployee extends CheckLogin{
 		frmDashboardstationemployees.setBounds(100, 100, 1280, 800);
 		frmDashboardstationemployees.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmDashboardstationemployees.getContentPane().setLayout(null);
+		frmDashboardstationemployees.setLocationRelativeTo(null);
 		
 		JLabel Logo = new JLabel();
 		Logo.setBounds(158, 11, 159, 201);
@@ -120,6 +121,7 @@ public class DashboardStationEmployee extends CheckLogin{
 				@SuppressWarnings("unused")
 				StationMemberRegister show1 = new StationMemberRegister();
 				StationMemberRegister.main(null);
+				frmDashboardstationemployees.setVisible(false);
 				
 			}
 		});
@@ -132,6 +134,11 @@ public class DashboardStationEmployee extends CheckLogin{
 		JButton btnAddWaletMember = new JButton(" Wallet");
 		btnAddWaletMember.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				@SuppressWarnings("unused")
+				Wallet wl = new Wallet();
+				Wallet.main(null);
+				frmDashboardstationemployees.setVisible(false);
+				
 			}
 		});
 		btnAddWaletMember.setIcon(new ImageIcon("C:\\Java\\ProjectAdvOOAGroup1\\images\\wallet_payment_purchase_coin_cash_money_icon_141978.png"));
@@ -153,12 +160,13 @@ public class DashboardStationEmployee extends CheckLogin{
 		btnLrtKoratTicket.setBounds(303, 359, 639, 100);
 		frmDashboardstationemployees.getContentPane().add(btnLrtKoratTicket);
 		
-		JButton BtnLogoutStation = new JButton("Station");
+		JButton BtnLogoutStation = new JButton("Logout");
 		BtnLogoutStation.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				@SuppressWarnings("unused")
 				StationLogin sta = new StationLogin();
 				StationLogin.main(null);
+				frmDashboardstationemployees.setVisible(false);
 			}
 		});
 		BtnLogoutStation.setIcon(new ImageIcon("C:\\Java\\ProjectAdvOOAGroup1\\images\\logout_icon_138409.png"));
@@ -185,21 +193,6 @@ public class DashboardStationEmployee extends CheckLogin{
 		newImg = img.getScaledInstance(Title2.getWidth(), Title2.getHeight(), Image.SCALE_SMOOTH);
 		image = new ImageIcon(newImg);
 		Title2.setIcon(image);
-		
-		JButton btnEmployee = new JButton(" Employee");
-		btnEmployee.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				//EmployeeLogin el = new EmployeeLogin();
-				//el.setTitle("Wow");
-				//el.setVisible(true);
-			}
-		});
-		btnEmployee.setIcon(new ImageIcon("C:\\Java\\ProjectAdvOOAGroup1\\images\\logout_icon_138409.png"));
-		btnEmployee.setForeground(Color.BLACK);
-		btnEmployee.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		btnEmployee.setBackground(SystemColor.activeCaption);
-		btnEmployee.setBounds(10, 680, 225, 55);
-		frmDashboardstationemployees.getContentPane().add(btnEmployee);
 		
 	}
 }

@@ -118,6 +118,7 @@ public class DashboardMachine extends DashboardStationEmployee {
 		frmDashboardmachineLrtkorat.setBounds(100, 100, 1280, 1000);
 		frmDashboardmachineLrtkorat.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmDashboardmachineLrtkorat.getContentPane().setLayout(null);
+		frmDashboardmachineLrtkorat.setLocationRelativeTo(null);
 		
 		CheckLogin cl = new CheckLogin();
 		
@@ -146,9 +147,9 @@ public class DashboardMachine extends DashboardStationEmployee {
 		lblOriginstation_1.setBounds(219, 655, 232, 44);
 		frmDashboardmachineLrtkorat.getContentPane().add(lblOriginstation_1);
 		
-		JLabel lblConclusion = new JLabel("Conclusion : ");
+		JLabel lblConclusion = new JLabel("\u0E2A\u0E23\u0E38\u0E1B\u0E01\u0E32\u0E23\u0E0B\u0E37\u0E49\u0E2D : ");
 		lblConclusion.setFont(new Font("SUT", Font.BOLD, 50));
-		lblConclusion.setBounds(22, 573, 247, 44);
+		lblConclusion.setBounds(22, 573, 247, 57);
 		frmDashboardmachineLrtkorat.getContentPane().add(lblConclusion);
 		
 		lbClock = new JLabel("");
@@ -597,19 +598,8 @@ public class DashboardMachine extends DashboardStationEmployee {
 		});
 		btnPay.setBackground(Color.LIGHT_GRAY);
 		btnPay.setFont(new Font("SUT", Font.BOLD, 50));
-		btnPay.setBounds(957, 600, 297, 80);
+		btnPay.setBounds(957, 651, 297, 80);
 		frmDashboardmachineLrtkorat.getContentPane().add(btnPay);
-		
-		JButton btnCancle = new JButton(" Cancle");
-		btnCancle.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				System.exit(0);
-			}
-		});
-		btnCancle.setBackground(Color.LIGHT_GRAY);
-		btnCancle.setFont(new Font("SUT", Font.BOLD, 50));
-		btnCancle.setBounds(1022, 838, 192, 60);
-		frmDashboardmachineLrtkorat.getContentPane().add(btnCancle);
 		
 		JButton btnWaletCheck = new JButton("WalletCheck");
 		btnWaletCheck.addActionListener(new ActionListener() {
@@ -617,12 +607,11 @@ public class DashboardMachine extends DashboardStationEmployee {
 				@SuppressWarnings("unused")
 				MemberWallet msl = new MemberWallet();
 				MemberWallet.main(null);
-				frmDashboardmachineLrtkorat.dispose();
 			}
 		});
 		btnWaletCheck.setBackground(Color.LIGHT_GRAY);
-		btnWaletCheck.setFont(new Font("SUT", Font.BOLD, 50));
-		btnWaletCheck.setBounds(957, 703, 297, 80);
+		btnWaletCheck.setFont(new Font("SUT", Font.BOLD, 40));
+		btnWaletCheck.setBounds(957, 774, 297, 80);
 		frmDashboardmachineLrtkorat.getContentPane().add(btnWaletCheck);
 		
 		

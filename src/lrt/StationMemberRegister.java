@@ -4,6 +4,8 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import java.awt.Image;
 
@@ -15,7 +17,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
 import java.awt.Color;
-import java.awt.SystemColor;
 import javax.swing.SwingConstants;
 import java.awt.Toolkit;
 import java.awt.event.ActionListener;
@@ -30,7 +31,7 @@ import java.util.Date;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextPane;
 
-public class StationMemberRegister {
+public class StationMemberRegister extends DashboardStationEmployee{
 
 	private JFrame frmMemberregisterLrtkorat;
 	private JTextField txtName;
@@ -94,6 +95,7 @@ public class StationMemberRegister {
 		frmMemberregisterLrtkorat.setBounds(100, 100, 1280, 800);
 		frmMemberregisterLrtkorat.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmMemberregisterLrtkorat.getContentPane().setLayout(null);
+		frmMemberregisterLrtkorat.setLocationRelativeTo(null);
 		
 		JLabel Logo = new JLabel();
 		Logo.setBounds(156, 0, 159, 201);
@@ -129,24 +131,24 @@ public class StationMemberRegister {
 		image = new ImageIcon(newImg);
 		Title2.setIcon(image);
 		
-		JLabel lblName = new JLabel("NAME:");
-		lblName.setFont(new Font("SUT", Font.BOLD, 30));
-		lblName.setBounds(32, 320, 108, 44);
+		JLabel lblName = new JLabel("\u0E0A\u0E37\u0E48\u0E2D : ");
+		lblName.setFont(new Font("SUT", Font.BOLD, 40));
+		lblName.setBounds(142, 317, 84, 44);
 		frmMemberregisterLrtkorat.getContentPane().add(lblName);
 		
-		JLabel lblSex = new JLabel("SEX:");
-		lblSex.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		lblSex.setBounds(351, 398, 67, 44);
+		JLabel lblSex = new JLabel("\u0E40\u0E1E\u0E28 :");
+		lblSex.setFont(new Font("SUT", Font.BOLD, 40));
+		lblSex.setBounds(127, 393, 67, 44);
 		frmMemberregisterLrtkorat.getContentPane().add(lblSex);
 		
-		JLabel lblTellNo = new JLabel("TELL NO:");
-		lblTellNo.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		lblTellNo.setBounds(286, 453, 135, 44);
+		JLabel lblTellNo = new JLabel("\u0E40\u0E1A\u0E2D\u0E23\u0E4C\u0E42\u0E17\u0E23\u0E28\u0E31\u0E1E\u0E17\u0E4C :");
+		lblTellNo.setFont(new Font("SUT", Font.BOLD, 40));
+		lblTellNo.setBounds(680, 317, 201, 44);
 		frmMemberregisterLrtkorat.getContentPane().add(lblTellNo);
 		
-		JLabel lblPinDigit = new JLabel("PIN 6 digit:");
-		lblPinDigit.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		lblPinDigit.setBounds(260, 510, 169, 44);
+		JLabel lblPinDigit = new JLabel("PIN 6 digit :");
+		lblPinDigit.setFont(new Font("SUT", Font.BOLD, 40));
+		lblPinDigit.setBounds(680, 402, 169, 44);
 		frmMemberregisterLrtkorat.getContentPane().add(lblPinDigit);
 		
 		JRadioButton Gender1 = new JRadioButton("  MALE");
@@ -155,8 +157,8 @@ public class StationMemberRegister {
 				txt = "Male";
 			}
 		});
-		Gender1.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		Gender1.setBounds(472, 408, 127, 25);
+		Gender1.setFont(new Font("SUT", Font.PLAIN, 30));
+		Gender1.setBounds(237, 403, 127, 25);
 		frmMemberregisterLrtkorat.getContentPane().add(Gender1);
 		
 		JRadioButton Gender2 = new JRadioButton("  FAMALE");
@@ -165,55 +167,55 @@ public class StationMemberRegister {
 				txt = "Famale";
 			}
 		});
-		Gender2.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		Gender2.setBounds(624, 408, 166, 25);
+		Gender2.setFont(new Font("SUT", Font.PLAIN, 30));
+		Gender2.setBounds(427, 403, 166, 25);
 		frmMemberregisterLrtkorat.getContentPane().add(Gender2);
 		
 		txtName = new JTextField();
-		txtName.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		txtName.setBounds(126, 324, 335, 40);
+		txtName.setFont(new Font("SUT", Font.PLAIN, 30));
+		txtName.setBounds(236, 317, 335, 44);
 		frmMemberregisterLrtkorat.getContentPane().add(txtName);
 		txtName.setColumns(10);
 		
 		txtTell = new JTextField();
-		txtTell.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		txtTell.setFont(new Font("SUT", Font.PLAIN, 30));
 		txtTell.setColumns(10);
-		txtTell.setBounds(453, 453, 238, 40);
+		txtTell.setBounds(891, 317, 318, 44);
 		frmMemberregisterLrtkorat.getContentPane().add(txtTell);
 		
 		txtPin = new JPasswordField();
-		txtPin.setBounds(453, 519, 118, 40);
+		txtPin.setFont(new Font("SUT", Font.PLAIN, 30));
+		txtPin.setBounds(891, 412, 175, 40);
 		frmMemberregisterLrtkorat.getContentPane().add(txtPin);
 		
 		textPaneAddress = new JTextPane();
-		textPaneAddress.setBounds(454, 570, 413, 74);
+		textPaneAddress.setBounds(244, 482, 451, 135);
 		frmMemberregisterLrtkorat.getContentPane().add(textPaneAddress);
 		
-		JButton btnRegister = new JButton("REGISTER");
+		JButton btnRegister = new JButton("\u0E40\u0E1E\u0E34\u0E48\u0E21\u0E25\u0E39\u0E01\u0E04\u0E49\u0E32");
 		btnRegister.addActionListener(new ActionListener() {
 			@SuppressWarnings("deprecation")
 			public void actionPerformed(ActionEvent e) {
 				DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
 				Date date = new Date();
-				
-				
-		
-				
-				//System.out.println("Member_Tel: " + txtTell.getText() + "\nMember_Name: " + txtName.getText() + "\nMember_PIN: " + txtPin.getText() + "\nMember_Sex: " + txt + "\nMember_Start: " + dateFormat.format(date) + "\nMember_Address: " + textPaneAddress.getText());
-			
-				
 			
 				try {
 					sql = "insert into Member (Member_Tel,Member_Name,Member_PIN,Member_Sex,Member_Start,Member_Address	) values ('" + txtTell.getText() + "','" + txtName.getText() + "','" + txtPin.getText() + "','" + txt + "','" + dateFormat.format(date) + "','" + textPaneAddress.getText() +"')";
 					st.executeUpdate(sql);
+					
+					JFrame f = new JFrame();  
+				    JOptionPane.showMessageDialog(f,"Add Data Customer Sucessful");
+				    DashboardStationEmployee.main(null);
+				    frmMemberregisterLrtkorat.setVisible(false);
+				    
 				} catch (SQLException el) {
 					// TODO Auto-generated catch block
 					System.out.print("SQL 236  " + el);;
 				}
 			}
 		});
-		btnRegister.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		btnRegister.setBounds(113, 668, 238, 65);
+		btnRegister.setFont(new Font("SUT", Font.BOLD, 40));
+		btnRegister.setBounds(523, 647, 326, 87);
 		frmMemberregisterLrtkorat.getContentPane().add(btnRegister);
 		
 		JButton btnCancle = new JButton("Clear");
@@ -227,22 +229,9 @@ public class StationMemberRegister {
 				
 			}
 		});
-		btnCancle.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		btnCancle.setBounds(525, 668, 147, 65);
+		btnCancle.setFont(new Font("SUT", Font.PLAIN, 30));
+		btnCancle.setBounds(182, 667, 147, 53);
 		frmMemberregisterLrtkorat.getContentPane().add(btnCancle);
-		
-		JButton button = new JButton("EXIT  ");
-		button.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				System.exit(0);
-			}
-		});
-		button.setHorizontalAlignment(SwingConstants.RIGHT);
-		button.setForeground(Color.BLACK);
-		button.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		button.setBackground(SystemColor.activeCaption);
-		button.setBounds(1078, 634, 131, 65);
-		frmMemberregisterLrtkorat.getContentPane().add(button);
 		
 		JLabel lblNewLabel_2_1 = new JLabel("\u0E25\u0E07\u0E17\u0E30\u0E40\u0E1A\u0E35\u0E22\u0E19\u0E2A\u0E21\u0E32\u0E0A\u0E34\u0E01\u0E43\u0E2B\u0E21\u0E48");
 		lblNewLabel_2_1.setHorizontalAlignment(SwingConstants.CENTER);
@@ -254,10 +243,22 @@ public class StationMemberRegister {
 		gender.add(Gender1);
 		gender.add(Gender2);
 		
-		JLabel lblAddress = new JLabel("Address:");
-		lblAddress.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		lblAddress.setBounds(292, 569, 129, 44);
+		JLabel lblAddress = new JLabel("\u0E17\u0E35\u0E48\u0E2D\u0E22\u0E39\u0E48 :");
+		lblAddress.setFont(new Font("SUT", Font.BOLD, 40));
+		lblAddress.setBounds(127, 471, 84, 44);
 		frmMemberregisterLrtkorat.getContentPane().add(lblAddress);
+		
+		JButton btnExit = new JButton("\u0E22\u0E01\u0E40\u0E25\u0E34\u0E01");
+		btnExit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				DashboardStationEmployee.main(null);
+				frmMemberregisterLrtkorat.setVisible(false);
+				
+			}
+		});
+		btnExit.setFont(new Font("SUT", Font.PLAIN, 30));
+		btnExit.setBounds(1015, 667, 147, 53);
+		frmMemberregisterLrtkorat.getContentPane().add(btnExit);
 		
 		
 		

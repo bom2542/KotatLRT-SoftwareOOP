@@ -70,6 +70,7 @@ public class StationLogin {
 		frmStationloginLrtkorat.setBounds(100, 100, 566, 466);
 		frmStationloginLrtkorat.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmStationloginLrtkorat.getContentPane().setLayout(null);
+		frmStationloginLrtkorat.setLocationRelativeTo(null);
 
 		JLabel Logo = new JLabel();
 		Logo.setBounds(238, 13, 93, 117);
@@ -95,8 +96,8 @@ public class StationLogin {
 				TxtPassword.setText("");
 			}
 		});
-		btnClear.setFont(new Font("SUT", Font.BOLD, 30));
-		btnClear.setBounds(210, 352, 132, 40);
+		btnClear.setFont(new Font("SUT", Font.PLAIN, 30));
+		btnClear.setBounds(10, 352, 132, 40);
 		frmStationloginLrtkorat.getContentPane().add(btnClear);
 		
 		//exit btn
@@ -106,8 +107,8 @@ public class StationLogin {
 				System.exit(0);
 			}
 		});
-		btnExit.setFont(new Font("SUT", Font.BOLD, 30));
-		btnExit.setBounds(387, 352, 132, 40);
+		btnExit.setFont(new Font("SUT", Font.PLAIN, 30));
+		btnExit.setBounds(408, 352, 132, 40);
 		frmStationloginLrtkorat.getContentPane().add(btnExit);
 		
 		TxtStation = new JTextField();
@@ -117,7 +118,7 @@ public class StationLogin {
 		TxtStation.setColumns(10);
 		
 		//login btn
-		JButton BtnLogin = new JButton("Login");
+		JButton BtnLogin = new JButton(" Login");
 		BtnLogin.addActionListener(new ActionListener() {
 			@SuppressWarnings("deprecation")
 			public void actionPerformed(ActionEvent e) {
@@ -140,8 +141,8 @@ public class StationLogin {
 				}
 			}
 		});
-		BtnLogin.setFont(new Font("SUT", Font.BOLD, 30));
-		BtnLogin.setBounds(23, 352, 132, 40);
+		BtnLogin.setFont(new Font("SUT", Font.BOLD, 40));
+		BtnLogin.setBounds(190, 337, 173, 60);
 		frmStationloginLrtkorat.getContentPane().add(BtnLogin);
 		
 		JLabel lblPassword = new JLabel("PIN : ");

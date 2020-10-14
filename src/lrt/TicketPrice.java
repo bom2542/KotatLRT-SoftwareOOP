@@ -9,6 +9,7 @@ import com.mysql.jdbc.Statement;
 
 public class TicketPrice{
 	
+	@SuppressWarnings("unused")
 	private String origin="",zone1="",zone2="",o1="",de="",dn="",de2="";
 	private double price=0,state=15;
 	public static double sum = 0.0;
