@@ -167,27 +167,12 @@ public class MemberLogin extends DashboardStationEmployee{
 				
 				wprice = tp.getSumPrice();
 				walle = cm.getWall();
-				//0.0
-				//System.out.println("\nPrice : " + wprice);
-				//System.out.println("\nWallet : " + walle);
-				/*wprice = 40.00;
-				walle = 250.00;*/
-				
-				
-				
 				
 				PriceUpdate pu = new PriceUpdate();
 				pu.setPrice(wprice, walle);
 				
 				
 				getWallet.setText(Double.toString(pu.moneyupdate()));
-				/*if(walle > wprice) {
-					sumprice = walle - wprice;
-				}else if(walle < wprice) {
-					
-				}else {
-					
-				}*/
 				
 				int checking = pu.getError();
 				if(checking == 0) {
@@ -233,9 +218,6 @@ public class MemberLogin extends DashboardStationEmployee{
 		JButton btExit = new JButton("Cancle");
 		btExit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				@SuppressWarnings("unused")
-				DashboardMachine dbm = new DashboardMachine();
-				DashboardMachine.main(null);
 				frmMemberloginLrtkorat.dispose();
 			}
 		});
@@ -266,8 +248,6 @@ public class MemberLogin extends DashboardStationEmployee{
 					getWallet.setText(wallet);
 					txtUsername.setEnabled(false);
 					txtPin.setEnabled(false);
-					
-					
 					
 					JOptionPane.showMessageDialog(f,"Welcome ! " + name + "\nYour Wallet : " + wallet + " THB","MemberLogin - LRTKORAT",JOptionPane.INFORMATION_MESSAGE); 
 					btLogin.show();

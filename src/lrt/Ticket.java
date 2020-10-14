@@ -21,7 +21,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.awt.event.ActionEvent;
 
-public class Ticket extends DashboardMachine{
+public class Ticket extends DestinationSession{
 
 	private JFrame frmTicketLrtkorat;
 	private String path;
@@ -29,6 +29,13 @@ public class Ticket extends DashboardMachine{
 	private Image img;
 	private Image newImg;
 	private ImageIcon image;
+	Connection con = null;
+	Statement st;
+	ResultSet rsRead;
+	
+	@SuppressWarnings("unused")
+	private String desc, orig;
+	
 	
 	@SuppressWarnings("unused")
 	private String tkId,tkdate,tkMem,tkSo,tkSd;
@@ -56,6 +63,14 @@ public class Ticket extends DashboardMachine{
 	public Ticket() {
 		initialize();
 	}
+	
+	protected void getOrig(String orig) {
+		this.orig = orig;
+	}
+	
+	protected void getDesc(String desc) {
+		this.desc = desc;
+	}
 
 	/**
 	 * Initialize the contents of the frame.
@@ -79,6 +94,7 @@ public class Ticket extends DashboardMachine{
 				tkSo = rsRead.getString("Station_Origin_ID");
 				tkSd = rsRead.getString("Station_Destination_ID");
 				tkP = rsRead.getDouble("Ticket_Price");
+				
 				}
 			}
 			con.close();
@@ -132,7 +148,7 @@ public class Ticket extends DashboardMachine{
 		
 		JLabel lblPhoneMember = new JLabel("Ticket ID :");
 		lblPhoneMember.setFont(new Font("SUT", Font.BOLD, 30));
-		lblPhoneMember.setBounds(288, 151, 154, 42);
+		lblPhoneMember.setBounds(334, 151, 122, 42);
 		frmTicketLrtkorat.getContentPane().add(lblPhoneMember);
 		
 		JLabel lblDestinationStation = new JLabel("Destination Station : ");
@@ -147,7 +163,7 @@ public class Ticket extends DashboardMachine{
 		
 		JLabel Pmember = new JLabel("");
 		Pmember.setFont(new Font("SUT", Font.PLAIN, 30));
-		Pmember.setBounds(402, 151, 132, 42);
+		Pmember.setBounds(466, 151, 68, 42);
 		frmTicketLrtkorat.getContentPane().add(Pmember);
 		
 		JLabel lblOriginStation = new JLabel("Origin Station : ");
@@ -181,10 +197,10 @@ public class Ticket extends DashboardMachine{
 		lblTic258tPrice.setBounds(159, 362, 201, 69);
 		frmTicketLrtkorat.getContentPane().add(lblTic258tPrice);
 		
-		JLabel lblPhoneMember_1 = new JLabel("-");
+		JLabel lblPhoneMember_1 = new JLabel("/");
 		lblPhoneMember_1.setHorizontalAlignment(SwingConstants.CENTER);
 		lblPhoneMember_1.setFont(new Font("SUT", Font.BOLD, 30));
-		lblPhoneMember_1.setBounds(509, 151, 37, 42);
+		lblPhoneMember_1.setBounds(520, 151, 37, 42);
 		frmTicketLrtkorat.getContentPane().add(lblPhoneMember_1);
 		
 		JLabel Logo = new JLabel();
@@ -224,9 +240,11 @@ public class Ticket extends DashboardMachine{
 		img = MyImage.getImage();
 		image = new ImageIcon(newImg);
 		
-		Pmember.setText(tkMem);
+		Pmember.setText(tkId);
 		OutName.setText("\u0E02\u0E2D\u0E2D\u0E20\u0E31\u0E22\u0E44\u0E21\u0E48\u0E2A\u0E32\u0E21\u0E32\u0E23\u0E16\u0E41\u0E2A\u0E14\u0E07\u0E02\u0E49\u0E2D\u0E21\u0E39\u0E25\u0E44\u0E14\u0E49");
 		outputOs.setText(tkSo);
+		/*OutName.setText(orig);
+		outputOs.setText(desc);*/
 		outTD.setText(tkdate);
 		
 		

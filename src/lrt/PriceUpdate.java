@@ -16,7 +16,6 @@ public class PriceUpdate {
 	Statement st;
 	Connection con = null;
 	ResultSet rsRead;
-	@SuppressWarnings("unused")
 	private static String tel;
 	String sql="";
 
@@ -67,10 +66,6 @@ public class PriceUpdate {
 			
 			sql = "UPDATE Member SET Member_Wallet = " + sumprice + " WHERE Member_Tel = '" + tel +"'";
 			st.executeUpdate(sql);
-			
-			//System.out.println("\nRecord Update Successfully");
-			//System.out.println(sumprice);
-			//System.out.println(tel);
 			
 			 con.close();
 			 st.close();

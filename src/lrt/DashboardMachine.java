@@ -34,7 +34,7 @@ public class DashboardMachine extends DashboardStationEmployee {
 	private Image newImg;
 	private ImageIcon image;
 	private JLabel lbClock;
-	private String destination="", status="";
+	public String destination="", status="";
 	private double sum=0;
 	private int num=1;
 	
@@ -596,6 +596,8 @@ public class DashboardMachine extends DashboardStationEmployee {
 				MemberLogin.main(null);
 			}
 		});
+		
+		
 		btnPay.setBackground(Color.LIGHT_GRAY);
 		btnPay.setFont(new Font("SUT", Font.BOLD, 50));
 		btnPay.setBounds(957, 651, 297, 80);
@@ -681,17 +683,16 @@ public class DashboardMachine extends DashboardStationEmployee {
 		TicketPrice tp2 = new TicketPrice();
 		tp2.MoneyCheck(stdid, destination);
 		
-		//System.out.print(stdid);
-		//System.out.print(status);
-		
-		
-		//System.out.println("Price: " + c.getSumPrice());
+		//setDestination();
 	}
+	
+	/*public String setDestination() {
+		System.out.println(destination);
+		return destination;
+	}*/
 	
 	public double getPriceTick() {
 		return sum;
 	}
-	
-	
-	
+		
 }
