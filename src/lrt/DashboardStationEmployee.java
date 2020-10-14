@@ -117,6 +117,7 @@ public class DashboardStationEmployee extends CheckLogin{
 		JButton btnRegisterMember = new JButton(" Register");
 		btnRegisterMember.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				@SuppressWarnings("unused")
 				StationMemberRegister show1 = new StationMemberRegister();
 				StationMemberRegister.main(null);
 				
@@ -155,6 +156,7 @@ public class DashboardStationEmployee extends CheckLogin{
 		JButton BtnLogoutStation = new JButton("Station");
 		BtnLogoutStation.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				@SuppressWarnings("unused")
 				StationLogin sta = new StationLogin();
 				StationLogin.main(null);
 			}
