@@ -189,6 +189,7 @@ public class StationMemberRegister extends DashboardStationEmployee{
 		frmMemberregisterLrtkorat.getContentPane().add(txtPin);
 		
 		textPaneAddress = new JTextPane();
+		textPaneAddress.setFont(new Font("SUT", Font.PLAIN, 30));
 		textPaneAddress.setBounds(244, 482, 451, 135);
 		frmMemberregisterLrtkorat.getContentPane().add(textPaneAddress);
 		

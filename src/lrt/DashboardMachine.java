@@ -20,9 +20,16 @@ import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
 
 import java.awt.event.ActionListener;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.awt.event.ActionEvent;
 import java.awt.Toolkit;
 import javax.swing.event.ChangeListener;
+
+import com.mysql.jdbc.Connection;
+import com.mysql.jdbc.Statement;
+
 import javax.swing.event.ChangeEvent;
 
 public class DashboardMachine extends DashboardStationEmployee {
@@ -76,11 +83,12 @@ public class DashboardMachine extends DashboardStationEmployee {
 						
 						second = timedate.get(Calendar.SECOND);
 						minute = timedate.get(Calendar.MINUTE);
-						hour = timedate.get(Calendar.HOUR);
+						hour = timedate.get(Calendar.HOUR_OF_DAY);
 					
 						lbClock.setText(day + "/" + month + "/" + year +" " + hour + ":" + minute + ":" + second);
 						date = day + "/" + month + "/" + year;
 						time = hour + ":" + minute + ":" + second;
+						
 						sleep(1000);
 						
 					}
@@ -98,12 +106,23 @@ public class DashboardMachine extends DashboardStationEmployee {
 		initialize();
 		clock();
 	}
+	
 
 	
 	/**
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+		
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/lrtkorat", "pharadornl_lrtkorat", "HSt1N9rb4Vpyl");
+			st = (Statement) con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_UPDATABLE);
+		}catch(SQLException e){
+			 System.out.println(e);
+		}catch(Exception ex) {
+			 System.out.println(ex);
+		}
 		
 		@SuppressWarnings("unused")
 		CheckMem cm = new CheckMem();
@@ -587,6 +606,7 @@ public class DashboardMachine extends DashboardStationEmployee {
 		lblPrice.setBounds(244, 867, 180, 44);
 		frmDashboardmachineLrtkorat.getContentPane().add(lblPrice);
 		
+		//wow
 		JButton btnPay = new JButton("Pay");
 		btnPay.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -594,6 +614,24 @@ public class DashboardMachine extends DashboardStationEmployee {
 				@SuppressWarnings("unused")
 				MemberLogin msl = new MemberLogin();
 				MemberLogin.main(null);
+				
+				String orig = lbOriginStation_1.getText();
+				String desc = destinat.getText();
+				//String tpri = Double.parseDouble(sum.getText());
+				//String tpri = Double.parseDouble(sum);
+				//Double tpri = 10.2;
+				/*String tpr = String.valueOf(sum);
+				Double tpr = */
+				
+				try {
+					String sql = "INSERT INTO session(Station_Origin, Station_Destination, Price) VALUES ('" + orig + "','"+ desc + "',"+ sum +")";
+					st.executeUpdate(sql);
+				}catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+				
 			}
 		});
 		
@@ -683,13 +721,8 @@ public class DashboardMachine extends DashboardStationEmployee {
 		TicketPrice tp2 = new TicketPrice();
 		tp2.MoneyCheck(stdid, destination);
 		
-		//setDestination();
 	}
 	
-	/*public String setDestination() {
-		System.out.println(destination);
-		return destination;
-	}*/
 	
 	public double getPriceTick() {
 		return sum;

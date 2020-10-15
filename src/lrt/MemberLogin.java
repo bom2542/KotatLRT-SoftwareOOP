@@ -96,6 +96,7 @@ public class MemberLogin extends DashboardStationEmployee{
 		CheckMem cm = new CheckMem();
 		JFrame f = new JFrame(); 
 		TicketPrice tp = new TicketPrice();
+		@SuppressWarnings("unused")
 		DashboardMachine dm = new DashboardMachine();
 		
 		frmMemberloginLrtkorat = new JFrame();
@@ -194,21 +195,45 @@ public class MemberLogin extends DashboardStationEmployee{
 				
 				String date2 = dateFormat.format(date);
 				String tels2 = pu.getTel();
-				String so = dm.getStationID();
-				String sd1 = tp.getDesination();
-				double tpx = tp.getSumPrice();
+				String so ="";//= dm.getStationID();
+				String sd1 ="" ;//= tp.getDesination();
+				double tpx =0.0;//= tp.getSumPrice();
 				
-				//System.out.println(date2 + "\n" + tels2 + "\n" + so + "\n" + sd1 + "\n" + tpx);
-				
+				/*try {
+					sql = "SELECT * FROM session";
+					rsRead = st.executeQuery(sql);
+					while(rsRead.next()) {
+						if(rsRead != null) {
+							so = rsRead.getString("Station_Origin");
+							sd1 = rsRead.getString("Station_Destination");
+							tpx = rsRead.getDouble("Price");
+							}
+						}
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}catch(Exception ex) {
+					 System.out.println(ex);
+				}*/
 				
 				try {
+					
+					sql = "SELECT * FROM session ORDER BY Station_No ASC";
+					rsRead = st.executeQuery(sql);
+					while(rsRead.next()) {
+						if(rsRead != null) {
+							so = rsRead.getString("Station_Origin");
+							sd1 = rsRead.getString("Station_Destination");
+							tpx = rsRead.getDouble("Price");
+							}
+						}
+					
 					sql = "INSERT INTO ticket(Ticket_Date, Member_Tel, Station_Origin_ID, Station_Destination_ID, Ticket_Price) VALUES ('" + date2 + "','"+ tels2 + "','"+ so +"','"+ sd1 +"',"+ tpx +")";
 					st.executeUpdate(sql);
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				//JOptionPane.showMessageDialog(null,"Suscess","Wallet",JOptionPane.PLAIN_MESSAGE);
 			}
 		});
 		btLogin.setFont(new Font("SUT", Font.BOLD, 40));
@@ -254,10 +279,6 @@ public class MemberLogin extends DashboardStationEmployee{
 				}else {
 				    JOptionPane.showMessageDialog(f,"Login Failed !!!","MemberLogin - LRTKORAT",JOptionPane.ERROR_MESSAGE);   
 				}
-				//check = cm.getCheckMem();
-				//System.out.println(check);
-				//btnLogin.hide();
-				//btLogin.show();
 			}
 		});
 		btnLogin.setFont(new Font("SUT", Font.BOLD, 40));
