@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.Statement;
 
-public class PriceUpdate {
+public class PriceUpdate extends DestinationSession{
 	
 	public double price;
 	public double wallet;
