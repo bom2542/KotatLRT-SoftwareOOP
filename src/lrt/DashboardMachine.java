@@ -305,6 +305,7 @@ public class DashboardMachine extends DashboardStationEmployee {
 				c.setStation();
 				destinat.setText(c.getStationNameEN());
 				
+				
 				sum = num * c.getprice();
 				c.setSumPrice(sum);
 				opPrice.setText(Double.toString(sum));
