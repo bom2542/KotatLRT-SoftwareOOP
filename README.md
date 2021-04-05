@@ -23,3 +23,4 @@ Video Presentation : https://youtu.be/9qOKr8r8rtI
 ![alt text](http://student.sut.ac.th/b6134228/imgkoratlrt2020/10.JPG)<br/>
 ![alt text](http://student.sut.ac.th/b6134228/imgkoratlrt2020/11.JPG)<br/>
 ![alt text](http://student.sut.ac.th/b6134228/imgkoratlrt2020/12.JPG)<br/>
+<p align="center">© 2020 <a href="https://www.facebook.com/PharadornB/">Phradorn Boonruam</a> Open-Source</p>
