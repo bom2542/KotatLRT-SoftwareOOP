@@ -1,6 +1,8 @@
 # KotatLRT2020-OOPJavaGUI
 Project this about of subject 214326 Advanced-Object Oriented Application, Information Technology, Suranaree University Of Technology, Nakhonrachasima , 30000 , Thailand<br/>
 # About
+TH name : การโปรแกรมซื้อตั๋วรถไฟรางเบาโคราช
+EN name : KORAT LIGHT RAILWAY TRANSPORTATION PROGRAMMING
 About is : Java, OOP Concept, GUI, Thread, Database, Spring
 # Developer
 Lecturer : Asst.Dr. Jittimon Angskun<br/>
