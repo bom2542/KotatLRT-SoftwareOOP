@@ -10,3 +10,16 @@ Dev by : <a href="https://www.facebook.com/PharadornB/">Mr.Pharadorn Boonruam </
 # Video Presentation
 [![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/9qOKr8r8rtI/0.jpg)](https://www.youtube.com/watch?v=9qOKr8r8rtI)<br/>
 Video Presentation : https://youtu.be/9qOKr8r8rtI
+# How to using application
+![alt text](http://student.sut.ac.th/b6134228/imgkoratlrt2020/1.JPG)<br/>
+![alt text](http://student.sut.ac.th/b6134228/imgkoratlrt2020/2.JPG)<br/>
+![alt text](http://student.sut.ac.th/b6134228/imgkoratlrt2020/3.JPG)<br/>
+![alt text](http://student.sut.ac.th/b6134228/imgkoratlrt2020/4.JPG)<br/>
+![alt text](http://student.sut.ac.th/b6134228/imgkoratlrt2020/5.JPG)<br/>
+![alt text](http://student.sut.ac.th/b6134228/imgkoratlrt2020/6.JPG)<br/>
+![alt text](http://student.sut.ac.th/b6134228/imgkoratlrt2020/7.JPG)<br/>
+![alt text](http://student.sut.ac.th/b6134228/imgkoratlrt2020/8.JPG)<br/>
+![alt text](http://student.sut.ac.th/b6134228/imgkoratlrt2020/9.JPG)<br/>
+![alt text](http://student.sut.ac.th/b6134228/imgkoratlrt2020/10.JPG)<br/>
+![alt text](http://student.sut.ac.th/b6134228/imgkoratlrt2020/11.JPG)<br/>
+![alt text](http://student.sut.ac.th/b6134228/imgkoratlrt2020/12.JPG)<br/>
